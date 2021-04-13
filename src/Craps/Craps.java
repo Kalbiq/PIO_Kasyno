@@ -1,15 +1,15 @@
-package Dice;
+package Craps;
 
 
-public class Dice {
+public class Craps {
     int[] dice = {0, 0};
     int score;
 
-    public Dice() {
+    public Craps() {
         this.score = 0;
     }
 
-    public void rollDice() {
+    public void rollDices() {
         int roll;
 
         for(int i = 0; i < 2; i++){
