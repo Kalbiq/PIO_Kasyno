@@ -1,8 +1,8 @@
-package CrapsGame;
+package Craps;
 
 import java.util.Arrays;
 
-public class PassLine extends Bet {
+public class BetPassLine extends Bet {
     int multiplier = 1;
     String name = "Pass Line";
     String description = "Bet on 7 and 11";

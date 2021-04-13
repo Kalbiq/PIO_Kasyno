@@ -1,4 +1,4 @@
-package CrapsGame;
+package Craps;
 
 public abstract class Bet {
     int multiplier;
