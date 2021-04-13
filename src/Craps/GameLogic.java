@@ -1,16 +1,16 @@
-package CrapsGame;
+package Craps;
 
 
 import java.util.Scanner;
 
-public class CrapsGame {
+public class GameLogic {
     int[] dice = {0, 0};
     int score;
     int sumDice;
     int bet;
     int stake;
 
-    public CrapsGame() {
+    public GameLogic() {
         this.score = 0;
     }
 

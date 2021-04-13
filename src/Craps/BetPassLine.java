@@ -1,4 +1,4 @@
-package CrapsGame;
+package Craps;
 
 import java.util.Arrays;
 
