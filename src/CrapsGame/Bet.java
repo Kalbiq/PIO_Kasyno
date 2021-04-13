@@ -1,8 +1,21 @@
 package CrapsGame;
 
-public interface Bet {
-    boolean check(int[] dice);
-    int multiplier();
-    String name();
-    String description();
+public abstract class Bet {
+    int multiplier;
+    String description;
+    String name;
+
+    abstract boolean check(int[] dice);
+
+    public int getMultiplier() {
+        return multiplier;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public String getName() {
+        return name;
+    }
 }
