@@ -8,20 +8,20 @@ public class BlackJack {
         System.out.println(e.decktoshuffle);
 
         Player player=new Player();
-        Player enemy=new Player();
+        Player dealer=new Player();
 
 
 
         for(int i=0;i<9;i++)
         {
             player.addCard(e.drawCard());
-            enemy.addCard(e.drawCard());
+            dealer.addCard(e.drawCard());
         }
 
         System.out.println("Reka gracza:");
         System.out.println(player.player_hand);
         System.out.println("Reka krupiera:");
-        System.out.println(enemy.player_hand);
+        System.out.println(dealer.player_hand);
 
     }
 
