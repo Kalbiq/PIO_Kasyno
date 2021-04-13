@@ -5,7 +5,7 @@ public class BlackJack {
     {
         Deck e= new Deck();
         e.shuffleDeck();
-        System.out.println(e.decktoshuffle);
+       // System.out.println(e.decktoshuffle);
 
         Player player=new Player();
         Player dealer=new Player();
@@ -32,8 +32,6 @@ public class BlackJack {
 
             } while (BlackjackLogic.checkPlayerSum(dealer.sum)&&player.sum>dealer.sum);
 
-            System.out.println("Reka krupiera:");
-            System.out.println(dealer.player_hand);
         }
 
         if(BlackjackLogic.matchResult(dealer.sum,player.sum))
@@ -41,6 +39,8 @@ public class BlackJack {
             System.out.println("WYGRALES!");
         }
         else System.out.println("PRZEGRALES :(");
+
+        TestGUI.createWindow(1200,700);
     }
 
 }
