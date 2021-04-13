@@ -10,7 +10,6 @@ public class Craps {
     int bet;
     int stake;
 
-
     public Craps() {
         this.score = 0;
     }
@@ -27,7 +26,6 @@ public class Craps {
         this.sumDice = this.dice[0] + this.dice[1];
         System.out.printf("Wyrzucono: %d, %d\n", dice[0], dice[1]);
         System.out.printf("Suma oczek: %d\n", sumDice);
-
     }
 
     public void setStake() {
@@ -41,7 +39,6 @@ public class Craps {
         System.out.println(("Craps (2, 3 lub 12) -> naciśnij 1\nSiódemka (7) -> naciśnij 2"));
         Scanner scanner = new Scanner(System.in);
         this.bet = scanner.nextInt();
-
     }
 
     public void checkResult() {
