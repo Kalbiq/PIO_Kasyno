@@ -1,11 +1,15 @@
 package Craps;
 
-import java.util.Arrays;
+public class BetHardways extends Bet{
+    public BetHardways(String name, int multiplier) {
+        super(name, multiplier);
+    }
 
-public class BetHardways extends Bet {
-    int multiplier = 8;
-    String name = "Hardways";
-    String description = "Bet on 2+2, 3+3, 4+4, 5+5";
+    @Override
+    public String description() {
+        return name + " (bet on [2+2, 3+3, 4+4, 5+5]" + ")" +
+                    ", multiplier = " + multiplier;
+    }
 
     @Override
     public boolean check(int[] dice) {
