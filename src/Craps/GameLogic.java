@@ -14,6 +14,10 @@ public class GameLogic {
 
     public GameLogic() {
         this.score = 0;
+        this.sumDice = 0;
+        this.bet = 0;
+        this.stake = 0;
+
         Bet betBoxcars = new Bet("Boxcars", new int[]{2,12}, 30);
         bets.add(betBoxcars);
         Bet betAceyDeucey = new Bet("Acey Deucey", new int[]{3}, 16 );
@@ -34,6 +38,17 @@ public class GameLogic {
         bets.add(betPassLine);
     }
 
+    public int getScore() {
+        return this.score;
+    }
+
+    public int getDie(int i) {
+        if(i == 0 || i == 1)
+            return this.dice[i];
+        else
+            return 1;
+    }
+
     public void rollDice() {
         int roll;
         this.sumDice = 0;
@@ -44,47 +59,34 @@ public class GameLogic {
         }
 
         this.sumDice = this.dice[0] + this.dice[1];
-        System.out.printf("Wyrzucono: %d, %d\n", dice[0], dice[1]);
-        System.out.printf("Suma oczek: %d\n", sumDice);
     }
 
-    public void setStake() {
-        System.out.println("Podaj stawkę:");
-        Scanner scanner = new Scanner(System.in);
-        this.stake = scanner.nextInt();
-        System.out.println("--------------------------------------------------------------------");
+    public void setStake(int stake) {
+        this.stake = stake;
     }
 
-    public void selectBet() {
-        System.out.println("Wybierz zakład:");
-        int i = 0;
-        for (Bet bet:bets) {
-            System.out.println(bet.description() + " -> naciśnij " + i);
-            i += 1;
-        }
-        Scanner scanner = new Scanner(System.in);
-        this.bet = scanner.nextInt();
-        System.out.println("--------------------------------------------------------------------");
+    public void selectBet(int bet) {
+        this.bet = bet;
     }
 
-    public void checkResult() {
+    public boolean checkResult() {
         Bet selectedBet = bets.get(bet);
         if (selectedBet.check(dice)) {
             score += selectedBet.getMultiplier() * stake;
-            System.out.println("Wygrałeś. Twoje kredyty: " + score);
+            return true;
         }
         else {
             score -= stake;
-            System.out.println("Przegrałeś. Twoje kredyty: " + score);
+            return false;
         }
-        System.out.println("--------------------------------------------------------------------");
     }
 
-    public void play() {
-        setStake();
-        selectBet();
+    public boolean play(int bet, int stake) {
+        setStake(stake);
+        selectBet(bet);
         rollDice();
-        checkResult();
+
+        return checkResult();
     }
 
 }
