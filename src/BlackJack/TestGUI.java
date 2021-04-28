@@ -39,7 +39,7 @@ public class TestGUI implements ActionListener {
            frame.setResizable(false);
            frame.setLayout(null);
 
-
+        System.out.println(System.getProperty("user.dir"));
 
            labelResult=new JLabel("");
            labelResult.setHorizontalAlignment(JLabel.CENTER);
@@ -96,7 +96,7 @@ public class TestGUI implements ActionListener {
            playerCardsPanel.setLayout(null);
            playerCardsPanel.setBackground(new Color(177, 254, 205));
            playerCardsPanel.setBounds(0,281,WIDTH,281);
-            playerCardsPanel.add(new Card("C:\\Users\\danio\\IdeaProjects\\PIO_Kasyno\\images\\cards\\" + player.player_hand.get(player.cards_amount-1)+".png",600).imageLabel);
+            playerCardsPanel.add(new Card(System.getProperty("user.dir")+"\\images\\cards\\" + player.player_hand.get(player.cards_amount-1)+".png",600).imageLabel);
            gamePanel.add(playerCardsPanel);
 
            JPanel enemyCardsPanel =new JPanel();
@@ -126,7 +126,7 @@ public class TestGUI implements ActionListener {
                             if(!pass) {
                                 if (BlackjackLogic.checkPlayerSum(player.sum)) {
                                     player.addCard(deck.drawCard());
-                                    playerCardsPanel.add( new Card("C:\\Users\\danio\\IdeaProjects\\PIO_Kasyno\\images\\cards\\" + player.player_hand.get(player.cards_amount-1)+".png",playerCardsStart).imageLabel);
+                                    playerCardsPanel.add( new Card(System.getProperty("user.dir")+"\\images\\cards\\" + player.player_hand.get(player.cards_amount-1)+".png",playerCardsStart).imageLabel);
                                     playerCardsStart-=25;
                                     playerCardsPanel.repaint();
                                     labelPlayer.setText("Suma Twojej reki: " + player.sum);
@@ -162,7 +162,7 @@ public class TestGUI implements ActionListener {
                                 do
                                 {
                                     dealer.addCard(deck.drawCard());
-                                    enemyCardsPanel.add( new Card("C:\\Users\\danio\\IdeaProjects\\PIO_Kasyno\\images\\cards\\" + dealer.player_hand.get(dealer.cards_amount-1)+".png",enemyCardsStart).imageLabel);
+                                    enemyCardsPanel.add( new Card(System.getProperty("user.dir")+"\\images\\cards\\" + dealer.player_hand.get(dealer.cards_amount-1)+".png",enemyCardsStart).imageLabel);
                                     enemyCardsStart-=25;
                                     enemyCardsPanel.repaint();
 
