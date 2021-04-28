@@ -6,19 +6,22 @@ import javax.swing.*;
 public class TestGUI implements ActionListener {
 
     private JFrame frame;
-    private JPanel mainPanel;
     private JPanel gamePanel;
     private JPanel controlPanel;
     private JPanel sumPanel;
     private ImageIcon karta1;
     private JPanel playerCard2;
-    private JPanel playerCardsPanel;
+    public JPanel playerCardsPanel;
     private JPanel enemyCardsPanel;
+    private JPanel buttonsPanel;
+    private JPanel resultPanel;
     private JButton buttonPlay;
     private JButton buttonPass;
     private JLabel labelPlayer;
     private JLabel labelDealer;
     private JLabel labelResult;
+    private int playerCardsStart=575;
+    private int enemyCardsStart =600;
     private boolean pass;
 
     public void createWindow(int WIDTH, int HEIGHT)
@@ -32,92 +35,87 @@ public class TestGUI implements ActionListener {
 
         EventQueue.invokeLater(()->
         {
-           karta1= new ImageIcon(new ImageIcon("C:\\Users\\Paweł\\Desktop\\karty_zapasowe\\PNG\\C2.png").getImage().getScaledInstance(136,210,Image.SCALE_DEFAULT));
-
-
            frame=new SimpleFrame(WIDTH, HEIGHT);
            frame.setResizable(false);
+           frame.setLayout(null);
 
-           //INFORMACJA O REZLUTACIE GRY
+
+
            labelResult=new JLabel("");
            labelResult.setHorizontalAlignment(JLabel.CENTER);
            labelResult.setVerticalAlignment(JLabel.CENTER);
-           labelResult.setBounds(100,200,50,100);
            labelResult.setFont(new Font("Serif", Font.ITALIC,80));
 
-           //TWORZENIE GLOWNEGO PANELU
-           mainPanel=new JPanel();
-           mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
 
-           //REKA GRACZA I KRUPIERA
-
-           playerCardsPanel=new JPanel();
-           playerCard2=new JPanel();
-           playerCardsPanel.setBackground(Color.YELLOW);
-           playerCardsPanel.setBorder(BorderFactory.createEmptyBorder(210,600,0,600));
-           playerCardsPanel.setLayout(new GridLayout(1,9));
-           labelResult.setIcon(karta1);
-           playerCard2.setPreferredSize(new Dimension(140,80));
-           playerCard2.setBackground(Color.BLACK);
-          // playerCardsPanel.add(playerCard1);
-          // playerCardsPanel.add(playerCard2);
-           enemyCardsPanel=new JPanel();
-           enemyCardsPanel.setBackground(Color.BLUE);
-           enemyCardsPanel.setBorder(BorderFactory.createEmptyBorder(0,600,210,600));
-           enemyCardsPanel.add(labelResult);
-
-           //POLE GRY
-           gamePanel=new JPanel();
-           gamePanel.setPreferredSize(new Dimension(640, 480));
-           gamePanel.setBackground(Color.DARK_GRAY);
-           gamePanel.add(enemyCardsPanel);
-           gamePanel.add(playerCardsPanel);
+           resultPanel = new JPanel();
+           resultPanel.setBounds(400,0,400,120);
+           resultPanel.setOpaque(false);
+           resultPanel.add(labelResult);
 
 
-            //PRZYCISKI STERUJACE
            buttonPlay=new SimpleButton("Dobierz");
            buttonPass=new SimpleButton("Pass");
 
-           //PIERWSZA KARTA DLA GRACZA
            player.addCard(deck.drawCard());
 
-           //INFORMACJE TEKSTOWE O SUMACH
+
            labelPlayer=new JLabel("Suma Twojej reki: "+player.sum);
            labelPlayer.setHorizontalAlignment(JLabel.CENTER);
            labelPlayer.setFont(new Font("MV Boli", Font.BOLD,15));
+           labelPlayer.setForeground(Color.BLACK);
+
            labelDealer=new JLabel("Suma reki krupiera: 0");
            labelDealer.setHorizontalAlignment(JLabel.CENTER);
+           labelDealer.setForeground(Color.BLACK);
            labelDealer.setFont(new Font("MV Boli", Font.BOLD,15));
 
-           //PANELE: PRZYCISKOW I SUM GRACZY
+           JPanel gamePanel = new JPanel();
+           gamePanel.setLayout(null);
+           gamePanel.setBounds(0,50,WIDTH,562);
 
-           controlPanel=new JPanel();
-           sumPanel=new JPanel();
-
-           controlPanel.setBorder(BorderFactory.createEmptyBorder(25,300,25,300));
-           controlPanel.setLayout(new GridLayout(2,2));
-           controlPanel.setBackground(Color.GRAY);
-           controlPanel.add(buttonPlay);
-           controlPanel.add(buttonPass);
-
-           sumPanel.setBorder(BorderFactory.createEmptyBorder(25,500,25,500));
+           JPanel sumPanel = new JPanel();
            sumPanel.setLayout(new GridLayout(0,1));
-           sumPanel.setBackground(Color.GRAY);
+           sumPanel.setBackground(Color.DARK_GRAY);
+           sumPanel.setBounds(0,0,WIDTH,50);
            sumPanel.add(labelPlayer);
            sumPanel.add(labelDealer);
 
+           JPanel buttonsPanel = new JPanel();
+           buttonsPanel.setLayout(new GridLayout(2,2));
+           buttonsPanel.setBounds(500,0,200,50);
+           buttonsPanel.add(buttonPlay);
+           buttonsPanel.add(buttonPass);
 
-           //DODAWANIE PANELI DO PANELA GLOWNEGO
-           mainPanel.add(sumPanel);
-           mainPanel.add(gamePanel);
-           mainPanel.add(controlPanel);
+           JPanel controlPanel = new JPanel();
+           controlPanel.setBounds(0,612,WIDTH,50);
+           controlPanel.setLayout(null);
+           controlPanel.setBackground(Color.GRAY);
+           controlPanel.add(buttonsPanel);
 
-           //DODAWANIE PANELA GLOWNEGO DO OKNA
-           frame.add(mainPanel);
-           frame.setTitle("TesT");
+           JPanel playerCardsPanel =new JPanel();
+           playerCardsPanel.setLayout(null);
+           playerCardsPanel.setBackground(new Color(177, 254, 205));
+           playerCardsPanel.setBounds(0,281,WIDTH,281);
+            playerCardsPanel.add(new Card("C:\\Users\\danio\\IdeaProjects\\PIO_Kasyno\\images\\cards\\" + player.player_hand.get(player.cards_amount-1)+".png",600).imageLabel);
+           gamePanel.add(playerCardsPanel);
+
+           JPanel enemyCardsPanel =new JPanel();
+           enemyCardsPanel.setBackground(new Color(177, 254, 205));
+           enemyCardsPanel.setLayout(null);
+           enemyCardsPanel.setBounds(0,0,WIDTH,281);
+           enemyCardsPanel.add(resultPanel);
+
+           //enemyCardsPanel.add(labelResult);
+           gamePanel.add(enemyCardsPanel);
+
+
+           frame.setTitle("Test");
+           frame.setLayout(null);
            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
            frame.setVisible(true);
-
+           frame.add(gamePanel);
+           frame.add(sumPanel);
+           frame.add(controlPanel);
 
            //ZACHOWANIA PRZYCISKOW
             buttonPlay.addActionListener(
@@ -128,6 +126,9 @@ public class TestGUI implements ActionListener {
                             if(!pass) {
                                 if (BlackjackLogic.checkPlayerSum(player.sum)) {
                                     player.addCard(deck.drawCard());
+                                    playerCardsPanel.add( new Card("C:\\Users\\danio\\IdeaProjects\\PIO_Kasyno\\images\\cards\\" + player.player_hand.get(player.cards_amount-1)+".png",playerCardsStart).imageLabel);
+                                    playerCardsStart-=25;
+                                    playerCardsPanel.repaint();
                                     labelPlayer.setText("Suma Twojej reki: " + player.sum);
                                 }
 
@@ -135,10 +136,12 @@ public class TestGUI implements ActionListener {
                                     labelResult.setForeground(Color.RED);
                                     labelResult.setText("Przegrales");
                                     buttonPass.setEnabled(false);
+                                    buttonPlay.setEnabled(false);
                                 } else if (player.sum == 21) {
                                     labelResult.setForeground(Color.GREEN);
                                     labelResult.setText("Wygrales");
                                     buttonPass.setEnabled(false);
+                                    buttonPlay.setEnabled(false);
                                 }
                             }
 
@@ -153,11 +156,15 @@ public class TestGUI implements ActionListener {
                             pass=true;
 
                             buttonPlay.setEnabled(false);
+                            buttonPass.setEnabled(false);
 
                             Thread thread = new Thread(() -> {
                                 do
                                 {
                                     dealer.addCard(deck.drawCard());
+                                    enemyCardsPanel.add( new Card("C:\\Users\\danio\\IdeaProjects\\PIO_Kasyno\\images\\cards\\" + dealer.player_hand.get(dealer.cards_amount-1)+".png",enemyCardsStart).imageLabel);
+                                    enemyCardsStart-=25;
+                                    enemyCardsPanel.repaint();
 
                                     labelDealer.setText("Suma reki krupiera: "+dealer.sum);
 
@@ -177,6 +184,7 @@ public class TestGUI implements ActionListener {
                                 {
                                     labelResult.setForeground(Color.RED);
                                     labelResult.setText("Przegrales");
+
                                 }
 
                             });
@@ -211,3 +219,14 @@ class SimpleButton extends JButton
 {
     public SimpleButton(String text) {setText(text);}
 }
+class Card{
+        JLabel imageLabel;
+        ImageIcon image;
+        Card(String path, int x){
+            image =new ImageIcon(new ImageIcon(path).getImage().getScaledInstance(98,150,Image.SCALE_DEFAULT));
+            imageLabel = new JLabel(image);
+            imageLabel.setBounds(x,65,98,150);
+
+        }
+
+        }
