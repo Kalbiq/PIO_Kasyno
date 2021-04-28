@@ -39,8 +39,6 @@ public class TestGUI implements ActionListener {
            frame.setResizable(false);
            frame.setLayout(null);
 
-        System.out.println(System.getProperty("user.dir"));
-
            labelResult=new JLabel("");
            labelResult.setHorizontalAlignment(JLabel.CENTER);
            labelResult.setVerticalAlignment(JLabel.CENTER);
