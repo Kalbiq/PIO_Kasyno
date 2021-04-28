@@ -100,7 +100,7 @@ public class TestGUI implements ActionListener {
            gamePanel.add(playerCardsPanel);
 
            JPanel enemyCardsPanel =new JPanel();
-           enemyCardsPanel.setBackground(new Color(177, 254, 205));
+           enemyCardsPanel.setBackground(new Color(0xFF5E76));
            enemyCardsPanel.setLayout(null);
            enemyCardsPanel.setBounds(0,0,WIDTH,281);
            enemyCardsPanel.add(resultPanel);
