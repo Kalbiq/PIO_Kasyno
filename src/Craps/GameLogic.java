@@ -14,6 +14,24 @@ public class GameLogic {
 
     public GameLogic() {
         this.score = 0;
+        Bet betBoxcars = new Bet("Boxcars", new int[]{2,12}, 30);
+        bets.add(betBoxcars);
+        Bet betAceyDeucey = new Bet("Acey Deucey", new int[]{3}, 16 );
+        bets.add(betAceyDeucey);
+        Bet betCraps = new Bet("Craps", new int[]{2,3,12}, 8);
+        bets.add(betCraps);
+        BetHardways betHardways = new BetHardways("Hardways", 8);
+        bets.add(betHardways);
+        Bet betEleven = new Bet("Eleven", new int[]{11}, 6);
+        bets.add(betEleven);
+        Bet betHorn = new Bet("Horn", new int[]{2,3,11,12}, 5);
+        bets.add(betHorn);
+        Bet betSeven = new Bet("Seven", new int[]{7}, 5);
+        bets.add(betSeven);
+        Bet betDontPassLine = new Bet("Don't Pass Line", new int[]{7,3}, 1);
+        bets.add(betDontPassLine);
+        Bet betPassLine = new Bet("Pass Line", new int[]{7,11}, 1);
+        bets.add(betPassLine);
     }
 
     public void rollDice() {
@@ -63,36 +81,10 @@ public class GameLogic {
     }
 
     public void play() {
-        Bet betBoxcars = new Bet("Boxcars", new int[]{2,12}, 30);
-        bets.add(betBoxcars);
-        Bet betAceyDeucey = new Bet("Acey Deucey", new int[]{3}, 16 );
-        bets.add(betAceyDeucey);
-        Bet betCraps = new Bet("Craps", new int[]{2,3,12}, 8);
-        bets.add(betCraps);
-        BetHardways betHardways = new BetHardways("Hardways", 8);
-        bets.add(betHardways);
-        Bet betEleven = new Bet("Eleven", new int[]{11}, 6);
-        bets.add(betEleven);
-        Bet betHorn = new Bet("Horn", new int[]{2,3,11,12}, 5);
-        bets.add(betHorn);
-        Bet betSeven = new Bet("Seven", new int[]{7}, 5);
-        bets.add(betSeven);
-        Bet betDontPassLine = new Bet("Don't Pass Line", new int[]{7,3}, 1);
-        bets.add(betDontPassLine);
-        Bet betPassLine = new Bet("Pass Line", new int[]{7,11}, 1);
-        bets.add(betPassLine);
-
-        while (true) {
-            setStake();
-            selectBet();
-            rollDice();
-            checkResult();
-            System.out.println("Grasz dalej?\nTak -> naciśnij 1\tNie -> naciśnij 0");
-            Scanner scanner = new Scanner(System.in);
-            int continueGame = scanner.nextInt();
-            if (continueGame == 0) break;
-            System.out.println("--------------------------------------------------------------------");
-        }
+        setStake();
+        selectBet();
+        rollDice();
+        checkResult();
     }
 
 }
