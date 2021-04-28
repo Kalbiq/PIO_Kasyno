@@ -24,7 +24,7 @@ public class Deck {
     public String drawCard()
     {
         deck_it++;
-                return decktoshuffle.get(deck_it-1);
+        return decktoshuffle.get(deck_it-1);
     }
 
 }
