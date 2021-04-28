@@ -1,4 +1,4 @@
-package com.company;
+package SlotMachine;
 import javax.swing.ImageIcon;
 
 import javax.swing.*;

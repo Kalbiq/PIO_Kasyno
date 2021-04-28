@@ -3,6 +3,9 @@ public class BlackJack {
 
     public static void main(String[] args)
     {
+
+        TestGUI.createWindow(1200,700);
+
         Deck e= new Deck();
         e.shuffleDeck();
        // System.out.println(e.decktoshuffle);
@@ -40,7 +43,6 @@ public class BlackJack {
         }
         else System.out.println("PRZEGRALES :(");
 
-        TestGUI.createWindow(1200,700);
     }
 
 }
