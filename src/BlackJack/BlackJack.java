@@ -3,8 +3,9 @@ public class BlackJack {
 
     public static void main(String[] args)
     {
+        TestGUI gui=new TestGUI();
 
-        TestGUI.createWindow(1200,700);
+        gui.createWindow(1200,700);
 
         Deck e= new Deck();
         e.shuffleDeck();
