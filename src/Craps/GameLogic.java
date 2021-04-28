@@ -13,7 +13,7 @@ public class GameLogic {
     List<Bet> bets = new ArrayList<>();
 
     public GameLogic() {
-        this.score = 0;
+        this.score = 100;
         this.sumDice = 0;
         this.bet = 0;
         this.stake = 0;
@@ -47,6 +47,10 @@ public class GameLogic {
             return this.dice[i];
         else
             return 1;
+    }
+
+    public List<Bet> getBets() {
+        return bets;
     }
 
     public void rollDice() {
