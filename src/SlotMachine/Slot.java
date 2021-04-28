@@ -1,4 +1,4 @@
-package com.company;
+package SlotMachine;
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
