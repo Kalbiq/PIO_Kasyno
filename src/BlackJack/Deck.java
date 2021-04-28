@@ -1,20 +1,18 @@
 
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
+import java.util.*;
 
 public class Deck {
 
-    public int deck_it=0;
-    public static String[] deck = new String[] {"H2","S2","D2","C2","H3","S3","D3","C3",
-            "H4","S4","D4","C4","H5","S5","D5","C5","H6","S6","D6","C6","H7","S7","D7","C7","H8","S8","D8","C8",
-            "H9","S9","D9","C9","HT","ST","DT","CT","HJ","SJ","DJ","CJ","HQ","SQ","DQ","CQ","HK","SK","DK","HA",
-            "CK","SA","DA","CA"}; // zadeklarować jako lista
-    public ArrayList<String> decktoshuffle; // zamienić na List
+    private int deck_it;
+    private ArrayList<String> decktoshuffle;
     public Deck() {
-        decktoshuffle=new ArrayList<>();
-        decktoshuffle.addAll(Arrays.asList(deck).subList(0, 52));
+        deck_it=0;
+        decktoshuffle = new ArrayList<>();
+        decktoshuffle.addAll(Arrays.asList("C2", "C3", "C4", "C5", "C6", "C7", "C8", "C9",
+                "CA", "CJ", "CK", "CQ", "CT", "D2", "D3", "D4", "D5", "D6", "D7", "D8", "D9", "DA", "DJ", "DK", "DQ", "DT", "H2", "H3",
+                "H4", "H5", "H6", "H7", "H8", "H9", "HA", "HJ", "HK", "HQ", "HT", "S2", "S3", "S4", "S5", "S6", "S7", "S8", "S9", "SA",
+                "SJ", "SK", "SQ", "ST"));
     }
 
     public void shuffleDeck(){
