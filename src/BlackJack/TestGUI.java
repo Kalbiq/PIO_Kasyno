@@ -11,7 +11,7 @@ public class TestGUI implements ActionListener {
     private JPanel sumPanel;
     private ImageIcon karta1;
     private JPanel playerCard2;
-    public JPanel playerCardsPanel;
+    private JPanel playerCardsPanel;
     private JPanel enemyCardsPanel;
     private JPanel buttonsPanel;
     private JPanel resultPanel;
