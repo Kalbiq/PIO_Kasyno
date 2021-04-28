@@ -11,7 +11,7 @@ public class DiceImg extends JLabel {
     public DiceImg(int x, int y){
         this.x = x;
         this.y = y;
-        this.imgName = "d1";
+        this.imgName = "dice1";
         setBounds(x, y, 100, 100);
         setImg(imgName);
     }

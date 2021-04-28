@@ -22,23 +22,23 @@ public class MyFrame extends JFrame implements ActionListener {
         //add(playButton);
 
         dicePanel = new JPanel();
-        dicePanel.setBounds(200, 50, 300, 100);
+        dicePanel.setBounds(225, 20, 250, 100);
         dicePanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
-        dice1 = new DiceImg(200, 50);
-        dice2 = new DiceImg(350, 50);
+        dice1 = new DiceImg(225, 20);
+        dice2 = new DiceImg(375, 20);
 
         dicePanel.add(dice1);
         dicePanel.add(dice2);
 
         // wybranie zakladu, stawki i opis zakladu
-        selectPanel = new JPanel();
-        dicePanel.setBounds(200, 160, 300, 100);
-        dicePanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        //selectPanel = new JPanel();
+        //dicePanel.setBounds(200, 100, 300, 100);
+        //dicePanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
         setLayout(null);
-        this.add(dicePanel);
-        this.add(selectPanel);
+        add(dicePanel);
+        //add(selectPanel);
         addButton();
         setVisible(true);
 
@@ -51,7 +51,7 @@ public class MyFrame extends JFrame implements ActionListener {
         button.addActionListener(this);
         button.setFocusable(false);
         button.setFont(new Font("Comic Sans", Font.BOLD, 25));
-        this.add(button);
+        add(button);
     }
 
     @Override
@@ -61,8 +61,8 @@ public class MyFrame extends JFrame implements ActionListener {
             int stake = 10;
             boolean win = gameLogic.play(bet, stake);
 
-            this.dice1.setImg("d" + gameLogic.getDie(0));
-            this.dice2.setImg("d" + gameLogic.getDie(1));
+            this.dice1.setImg("dice" + gameLogic.getDie(0));
+            this.dice2.setImg("dice" + gameLogic.getDie(1));
 
             if (win) {
                 //tekst o wygranej
