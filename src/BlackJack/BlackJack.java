@@ -1,15 +1,23 @@
 
 public class BlackJack {
 
+    public static int FUNDS;
+
+    static {
+        FUNDS = 100;
+    }
+
     public static void main(String[] args)
     {
+
         TestGUI gui=new TestGUI();
 
-        gui.createWindow(1200,738, 100);
+        gui.createWindow(1200,738, FUNDS);
 
-        Deck e= new Deck();
+     /*   Deck e= new Deck();
         e.shuffleDeck();
        // System.out.println(e.decktoshuffle);
+
 
         Player player=new Player();
         Player dealer=new Player();
@@ -43,8 +51,10 @@ public class BlackJack {
             System.out.println("WYGRALES!");
         }
         else System.out.println("PRZEGRALES :(");
-
+*/
     }
+
+
 
 }
 

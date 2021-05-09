@@ -12,14 +12,14 @@ public class TestGUI implements ActionListener {
     private JPanel gamePanel;
     private JPanel controlPanel;
     private JPanel sumPanel;
-    private ImageIcon karta1;
-    private JPanel playerCard2;
     private JLayeredPane playerCardsPanel;
     private JLayeredPane enemyCardsPanel;
     private JPanel buttonsPanel;
     private JPanel resultPanel;
     private JButton buttonPlay;
     private JButton buttonPass;
+    private JButton buttonMenu;
+    private JButton buttonReset;
     private JLabel labelPlayer;
     private JLabel labelDealer;
     private JLabel labelResult;
@@ -29,7 +29,9 @@ public class TestGUI implements ActionListener {
     private int enemyCardsStart = 600;
     private int zPlayerOrder=0;
     private int zEnemyOrder=0;
+    public int playerFUNDS;
     private boolean pass;
+    private boolean reset;
 
     public void createWindow(int WIDTH, int HEIGHT, int FUNDS) {
         Player player = new Player();
@@ -37,13 +39,21 @@ public class TestGUI implements ActionListener {
         Deck deck = new Deck();
         deck.shuffleDeck();
         pass = false;
+        reset= true;
+        playerFUNDS=FUNDS;
 
 
         EventQueue.invokeLater(() ->
         {
+
+            Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+            ImageIcon icon= new ImageIcon(System.getProperty("user.dir")+"\\images\\iconBlackjack.png");
+
             frame = new SimpleFrame(WIDTH, HEIGHT);
+            frame.setLocation(dim.width/2-frame.getSize().width/2, dim.height/2-frame.getSize().height/2);
             frame.setResizable(false);
             frame.setLayout(null);
+            frame.setIconImage(icon.getImage());
 
             labelResult = new JLabel("");
             labelResult.setHorizontalAlignment(JLabel.CENTER);
@@ -60,6 +70,10 @@ public class TestGUI implements ActionListener {
 
             buttonPlay = new SimpleButton("Dobierz");
             buttonPass = new SimpleButton("Pass");
+            buttonMenu = new SimpleButton("Menu");
+            buttonMenu.setBounds(35,30,100,40);
+            buttonReset = new SimpleButton("Reset");
+            buttonReset.setBounds(1050,30,100,40);
 
             player.addCard(deck.drawCard());
 
@@ -82,7 +96,7 @@ public class TestGUI implements ActionListener {
             labelSpinner.setBounds(50,25,200,50);
             labelSpinner.setForeground(Color.white);
             labelSpinner.setFont(new Font("MV Boli", Font.BOLD, 20));
-            stakeSpinner = new JSpinner(new SpinnerNumberModel(5,5,FUNDS,5));
+            stakeSpinner = new JSpinner(new SpinnerNumberModel(0,0,FUNDS,5));
             ((JSpinner.DefaultEditor) stakeSpinner.getEditor()).getTextField().setEditable(false);
             stakeSpinner.setBounds(150,35,50,30);
 
@@ -112,11 +126,14 @@ public class TestGUI implements ActionListener {
             buttonsPanel.add(buttonPlay);
             buttonsPanel.add(buttonPass);
 
+
             controlPanel = new JPanel();
             controlPanel.setBounds(0, 600, WIDTH, 100);
             controlPanel.setLayout(null);
             controlPanel.setBackground(Color.DARK_GRAY);
             controlPanel.add(buttonsPanel);
+            controlPanel.add(buttonReset);
+            controlPanel.add(buttonMenu);
 
             playerCardsPanel = new JLayeredPane();
             playerCardsPanel.setLayout(null);
@@ -140,7 +157,7 @@ public class TestGUI implements ActionListener {
             gamePanel.add(enemyCardsPanel);
 
 
-            frame.setTitle("Test");
+            frame.setTitle("Kasyno Lichwiarz - Blackjack");
             frame.setLayout(null);
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             frame.setVisible(true);
@@ -171,15 +188,23 @@ public class TestGUI implements ActionListener {
                                 if (player.sum > 21) {
                                     labelResult.setForeground(Color.RED);
                                     labelResult.setText("Przegrales");
+                                    FundsRebalance.subtractBalance(playerFUNDS, (Integer)stakeSpinner.getValue());
+                                    playerFUNDS=playerFUNDS-(Integer)stakeSpinner.getValue();
                                     buttonPass.setEnabled(false);
                                     buttonPlay.setEnabled(false);
+                                    labelFunds.setText("Fundusze: "+playerFUNDS+"$");
                                     gamePanel.repaint();
+                                    reset=false;
                                 } else if (player.sum == 21) {
                                     labelResult.setForeground(Color.GREEN);
                                     labelResult.setText("Wygrales");
+                                    FundsRebalance.addBalance(playerFUNDS, (Integer)stakeSpinner.getValue());
+                                    playerFUNDS=playerFUNDS+(Integer)stakeSpinner.getValue();
                                     buttonPass.setEnabled(false);
                                     buttonPlay.setEnabled(false);
+                                    labelFunds.setText("Fundusze: "+playerFUNDS+"$");
                                     gamePanel.repaint();
+                                    reset=false;
                                 }
                             }
 
@@ -197,6 +222,7 @@ public class TestGUI implements ActionListener {
 
                             buttonPlay.setEnabled(false);
                             buttonPass.setEnabled(false);
+                            buttonReset.setEnabled(false);
 
                             Timer myTimer = new Timer();
 
@@ -214,16 +240,25 @@ public class TestGUI implements ActionListener {
                                     labelDealer.setText("Suma reki krupiera: " + dealer.sum);
 
                                     if (dealer.sum >= player.sum && dealer.sum<=21) {
-
+                                        buttonReset.setEnabled(true);
                                         labelResult.setForeground(Color.RED);
                                         labelResult.setText("Przegrales");
+                                        FundsRebalance.subtractBalance(playerFUNDS, (Integer)stakeSpinner.getValue());
+                                        playerFUNDS=playerFUNDS-(Integer)stakeSpinner.getValue();
+                                        labelFunds.setText("Fundusze: "+playerFUNDS+"$");
                                         gamePanel.repaint();
+                                        reset=false;
                                         myTimer.cancel();
 
                                         } else if (dealer.sum>21){
+                                        buttonReset.setEnabled(true);
                                         labelResult.setForeground(Color.GREEN);
                                         labelResult.setText("Wygrales");
+                                        FundsRebalance.addBalance(playerFUNDS, (Integer)stakeSpinner.getValue());
+                                        playerFUNDS=playerFUNDS+(Integer)stakeSpinner.getValue();
+                                        labelFunds.setText("Fundusze: "+playerFUNDS+"$");
                                         gamePanel.repaint();
+                                        reset=false;
                                         myTimer.cancel();
                                         }
 
@@ -240,6 +275,34 @@ public class TestGUI implements ActionListener {
                         }
 
                     });
+
+            buttonReset.addActionListener(
+                    new ActionListener() {
+                        @Override
+                        public void actionPerformed(ActionEvent e) {
+
+                            final int stake=(Integer)stakeSpinner.getValue();
+
+                            if(reset && stake>0){
+                                FundsRebalance.displayWarning(stake, playerFUNDS, frame);
+                            }
+                            else
+                            {
+                                BlackJack.main(new String[]{});
+                                frame.setVisible(false);
+                                frame.dispose();
+                            }
+
+
+
+                            }
+
+
+                    }
+            );
+
+
+
         });
 
     }
@@ -274,4 +337,6 @@ public class TestGUI implements ActionListener {
         }
 
     }
+
+
 }
