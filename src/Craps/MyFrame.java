@@ -1,5 +1,7 @@
 package Craps;
 
+import com.sun.jdi.IntegerValue;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -9,49 +11,79 @@ import java.util.List;
 
 public class MyFrame extends JFrame implements ActionListener {
     private JButton button;
-    private GameLogic gameLogic;
+    private final GameLogic gameLogic;
 //    private JPanel dicePanel;
 //    private JPanel selectPanel;
-    private DiceImg dice1;
-    private DiceImg dice2;
-    private JSpinner stakeSpinner;
-    private JLabel scoreLabel;
+    private final DiceImg dice1;
+    private final DiceImg dice2;
+    private final JSpinner stakeSpinner;
+    private final JLabel scoreLabel;
+    private final JLabel scoreText;
+    //private final JComboBox<List<Bet>> betCombo;
 
 
     public MyFrame() {
         super("Gra w kości");
         gameLogic = new GameLogic();
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(700, 500);
-        //JButton playButton = new JButton("GRAJ");
-        //add(playButton);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setSize(700, 500);
+        this.setMinimumSize(new Dimension(600, 400));
 
         JPanel mainContainer = new JPanel();
         mainContainer.setLayout(new BoxLayout(mainContainer, BoxLayout.X_AXIS));
+        mainContainer.setBorder(BorderFactory.createLineBorder(Color.YELLOW, 5));
 
         JPanel betContainer = new JPanel();
         betContainer.setLayout(new BoxLayout(betContainer, BoxLayout.Y_AXIS));
         betContainer.setMaximumSize(new Dimension(250, 2000));
         betContainer.setBorder(BorderFactory.createLineBorder(Color.BLACK, 5));
+        betContainer.setAlignmentX(Component.RIGHT_ALIGNMENT);
+        betContainer.setAlignmentY(Component.TOP_ALIGNMENT);
 
         JPanel playContainer = new JPanel();
         playContainer.setLayout(new BoxLayout(playContainer, BoxLayout.Y_AXIS));
+        playContainer.setBorder(BorderFactory.createLineBorder(Color.RED, 5));
+        playContainer.setAlignmentX(Component.RIGHT_ALIGNMENT);
+        playContainer.setAlignmentY(Component.TOP_ALIGNMENT);
 
         // Bet Container
-        stakeSpinner = new JSpinner(new SpinnerNumberModel(5,5,100,5));
-        stakeSpinner.setSize(30, 10);
+        scoreText = new JLabel();
+        scoreText.setText("Twoje fundusze: " + gameLogic.getScore());
+        scoreText.setFont(new Font("MV Boli", Font.BOLD,20));
+        scoreText.setAlignmentY(Component.TOP_ALIGNMENT);
+        scoreText.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        betContainer.add(stakeSpinner);
+        JPanel stakePanel = new JPanel();
+        stakePanel.setLayout(new BoxLayout(stakePanel, BoxLayout.X_AXIS));
+        stakePanel.setBorder(BorderFactory.createLineBorder(Color.BLUE, 5));
+        stakePanel.setAlignmentY(Component.TOP_ALIGNMENT);
+        stakePanel.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        JLabel stakeText = new JLabel();
+        stakeText.setText("Ile obstawiasz: ");
+        stakeText.setFont(new Font("MV Boli", Font.BOLD,20));
+
+        stakeSpinner = new JSpinner(new SpinnerNumberModel(5,5,100,5));
+        stakeSpinner.setMaximumSize(new Dimension(50, 30));
+
+        stakePanel.add(stakeText);
+        stakePanel.add(stakeSpinner);
+
+        //betCombo = new JComboBox<List<Bet>>(gameLogic.bets);
+
+        betContainer.add(scoreText);
+        betContainer.add(stakePanel);
 
         // Play Container
         JPanel dicePanel = new JPanel();
         dicePanel.setLayout(new BoxLayout(dicePanel, BoxLayout.X_AXIS));
         dicePanel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        dicePanel.setBorder(BorderFactory.createLineBorder(Color.GREEN, 5));
 
         dice1 = new DiceImg();
-        dice1.setAlignmentX(0.5f);
+        dice1.setAlignmentX(Component.CENTER_ALIGNMENT);
         dice2 = new DiceImg();
-        dice2.setAlignmentX(0.5f);
+        dice2.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         dicePanel.add(dice1);
         dicePanel.add(dice2);
@@ -62,11 +94,11 @@ public class MyFrame extends JFrame implements ActionListener {
         scoreLabel.setOpaque(true);
         scoreLabel.setVerticalAlignment(JLabel.BOTTOM);
         scoreLabel.setHorizontalAlignment(JLabel.CENTER);
-        scoreLabel.setSize(300, 150);
+        scoreLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         button = new JButton();
         button.setSize(150, 75);
-        button.setAlignmentX(0.5f);
+        button.setAlignmentX(Component.CENTER_ALIGNMENT);
         button.setText("Rzuć!");
         button.addActionListener(this);
         button.setFocusable(false);
@@ -148,10 +180,12 @@ public class MyFrame extends JFrame implements ActionListener {
             if (win) {
                 // tekst o wygranej
                 scoreLabel.setText("Wygrales! Twoje fundusze: " + gameLogic.getScore() + "$");
+                scoreText.setText("Twoje fundusze: " + gameLogic.getScore());
 
             } else {
                 //tekst o przegranej
                 scoreLabel.setText("Przegrales. Twoje fundusze: " + gameLogic.getScore());
+                scoreText.setText("Twoje fundusze: " + gameLogic.getScore());
 
             }
         }
