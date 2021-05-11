@@ -1,5 +1,8 @@
 package MainMenu;
 
+import SlotMachine.SlotMachine;
+
+
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.*;
@@ -139,9 +142,24 @@ public class MainMenu {
                     new ActionListener() {
                         @Override
                         public void actionPerformed(ActionEvent e) {
+
                             frame.setVisible(false);
                             frame.dispose();
                             BJ.BlackJack.main(new String[]{});
+
+                        }
+
+                    }
+            );
+            slotmachineButton.addActionListener(
+                    new ActionListener() {
+                        @Override
+                        public void actionPerformed(ActionEvent e) {
+                            frame.getContentPane().removeAll();
+                            frame.add(new SlotMachine(FUNDS));
+                            frame.revalidate();
+                            frame.repaint();
+
 
                         }
 
