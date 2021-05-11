@@ -28,9 +28,9 @@ public class BlackJack {
             FUNDS=scanner.nextInt();
         }
 
-        TestGUI gui=new TestGUI();
+       // TestGUI gui=new TestGUI();
 
-        gui.createWindow(1200,700, FUNDS);
+        //gui.createWindow(1200,700, FUNDS);
 
      /*   Deck e= new Deck();
         e.shuffleDeck();

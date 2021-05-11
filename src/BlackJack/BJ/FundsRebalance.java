@@ -52,7 +52,7 @@ public class FundsRebalance {
         }
     }
 
-    public static void displayWarning(int value, int playerFUNDS, JFrame refFrame)
+    public static void displayWarning(int value, int playerFUNDS)
     {
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 
@@ -100,9 +100,7 @@ public class FundsRebalance {
                         frame.setVisible(false);
                         frame.dispose();
                         FundsRebalance.subtractBalance(playerFUNDS,value);
-                        refFrame.setVisible(false);
-                        refFrame.dispose();
-                        BlackJack.main(new String[]{});
+                        MainMenu.MainMenu.refreshFunds(value);
 
                     }
 
@@ -131,7 +129,7 @@ public class FundsRebalance {
 
 
 
-    public static void displayWarningToMenu(int value, int playerFUNDS, JFrame refFrame)
+    public static void displayWarningToMenu(int value, int playerFUNDS)
     {
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 
@@ -179,10 +177,7 @@ public class FundsRebalance {
                         frame.setVisible(false);
                         frame.dispose();
                         FundsRebalance.subtractBalance(playerFUNDS,value);
-                        refFrame.setVisible(false);
-                        refFrame.dispose();
-                        MainMenu.MainMenu.main(new String[]{});
-
+                        MainMenu.MainMenu.addPanels();
                     }
 
 

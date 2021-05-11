@@ -1,5 +1,6 @@
 package MainMenu;
 
+import BJ.BlackJack;
 import BJ.FundsRebalance;
 import SlotMachine.SlotMachine;
 
@@ -150,9 +151,20 @@ public class MainMenu {
                         @Override
                         public void actionPerformed(ActionEvent e) {
 
-                            frame.setVisible(false);
-                            frame.dispose();
-                            BJ.BlackJack.main(new String[]{});
+                            frame.getContentPane().removeAll();
+
+                            BJ.TestGUI bj=new BJ.TestGUI(1200,700,FUNDS);
+
+                            frame.add(bj);
+
+
+                            frame.validate();
+                            bj.validate();
+
+                            frame.repaint();
+                            frame.revalidate();
+
+
 
                         }
 
@@ -208,7 +220,18 @@ public class MainMenu {
         });
     }
 
-    private static void addPanels() {
+    public static void addPanels() {
+
+        frame.getContentPane().removeAll();
+
+        frame.repaint();
+        frame.revalidate();
+
+        BlackJack.main(new String[]{"",});
+        FUNDS=BlackJack.FUNDS;
+
+        labelFunds.setText("Twoje fundusze: "+FUNDS+" $");
+
         frame.add(imagePanel);
         menuPanel.add(blackjackButton);
         menuPanel.add(slotmachineButton);
@@ -217,12 +240,47 @@ public class MainMenu {
 
         frame.add(menuPanel);
         frame.add(fundsPanel);
+
+        frame.repaint();
+        frame.revalidate();
+
     }
 
     public static void changeFunds(int value)
     {
         labelFunds.setText("Twoje fundusze: "+value+" $");
         labelFunds.repaint();
+    }
+
+    public static void refreshBlackjack()
+    {
+        frame.getContentPane().removeAll();
+
+
+        BlackJack.main(new String[]{"",});
+        FUNDS=BlackJack.FUNDS;
+
+
+        BJ.TestGUI bj=new BJ.TestGUI(1200,700,FUNDS);
+
+        frame.add(bj);
+
+
+        frame.validate();
+        bj.validate();
+
+        frame.repaint();
+        frame.revalidate();
+
+
+
+    }
+
+    public static void refreshFunds(int value)
+    {
+        System.out.println("refreshFunds");
+        FUNDS-=value;
+        refreshBlackjack();
     }
 
 }

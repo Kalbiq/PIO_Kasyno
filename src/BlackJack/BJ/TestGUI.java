@@ -7,14 +7,13 @@ import javax.swing.*;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class TestGUI implements ActionListener {
+public class TestGUI extends JPanel {
 
     private JFrame frame;
     private JSpinner stakeSpinner;
     private JPanel gamePanel;
     private JPanel controlPanel;
-    private JPanel sumPanel;
-    private JPanel mainPanel;
+    public JPanel sumPanel;
     private JLayeredPane playerCardsPanel;
     private JLayeredPane enemyCardsPanel;
     private JPanel buttonsPanel;
@@ -26,7 +25,7 @@ public class TestGUI implements ActionListener {
     private JLabel labelDealer;
     private JLabel labelResult;
     private JLabel labelSpinner;
-    private JLabel labelFunds;
+    public JLabel labelFunds;
     private JLabel background;
     private ImageIcon pokertable;
     private int playerCardsStart = 500;
@@ -34,10 +33,11 @@ public class TestGUI implements ActionListener {
     private int zPlayerOrder=0;
     private int zEnemyOrder=0;
     public int playerFUNDS;
+    public int playerStake;
     private boolean pass;
     private boolean reset;
 
-    public void createWindow(int WIDTH, int HEIGHT, int FUNDS) {
+    public TestGUI(int WIDTH, int HEIGHT, int FUNDS) {
         Player player = new Player();
         Player dealer = new Player();
         Deck deck = new Deck();
@@ -45,6 +45,7 @@ public class TestGUI implements ActionListener {
         pass = false;
         reset= true;
         playerFUNDS=FUNDS;
+        playerStake=0;
 
 
         EventQueue.invokeLater(() ->
@@ -58,9 +59,10 @@ public class TestGUI implements ActionListener {
             frame.setResizable(false);
             frame.setLayout(null);
             frame.setIconImage(icon.getImage());
-            mainPanel =new JPanel();
-            mainPanel.setLayout(null);
-            mainPanel.setBounds(0,0,WIDTH,HEIGHT);
+
+
+            this.setLayout(null);
+            this.setBounds(0,0,WIDTH,HEIGHT);
 
             pokertable = new ImageIcon(new ImageIcon(System.getProperty("user.dir")+"\\images\\pokertable.png").
                     getImage().getScaledInstance(1185, 700, Image.SCALE_DEFAULT));
@@ -79,7 +81,9 @@ public class TestGUI implements ActionListener {
 
 
             buttonPlay = new SimpleButton("Dobierz");
+            buttonPlay.setBounds(0,0,100,50);
             buttonPass = new SimpleButton("Pass");
+            buttonPass.setBounds(100,0,100,50);
             buttonMenu = new SimpleButton("Menu");
             buttonMenu.setBounds(35,21,100,40);
             buttonReset = new SimpleButton("Reset");
@@ -107,8 +111,9 @@ public class TestGUI implements ActionListener {
             labelSpinner.setForeground(Color.white);
             labelSpinner.setFont(new Font("MV Boli", Font.BOLD, 20));
             stakeSpinner = new JSpinner(new SpinnerNumberModel(0,0,FUNDS,5));
-            ((JSpinner.DefaultEditor) stakeSpinner.getEditor()).getTextField().setEditable(false);
             stakeSpinner.setBounds(125,25,50,30);
+            ((JSpinner.DefaultEditor) stakeSpinner.getEditor()).getTextField().setEditable(false);
+
 
             labelFunds= new JLabel("Fundusze: "+FUNDS+"$");
             labelFunds.setBounds(1010,15,200,50);
@@ -131,8 +136,11 @@ public class TestGUI implements ActionListener {
             sumPanel.add(labelDealer);
             sumPanel.add(labelFunds);
 
+            stakeSpinner.revalidate();
+            stakeSpinner.repaint();
+
             buttonsPanel = new JPanel();
-            buttonsPanel.setLayout(new GridLayout(1,1));
+            buttonsPanel.setLayout(null);
             buttonsPanel.setBounds(500, 16, 200, 50);
             buttonsPanel.add(buttonPlay);
             buttonsPanel.add(buttonPass);
@@ -172,13 +180,17 @@ public class TestGUI implements ActionListener {
             frame.setTitle("Kasyno Lichwiarz - Blackjack");
             frame.setLayout(null);
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            frame.setVisible(true);
+            frame.setVisible(false);
 
-            mainPanel.add(gamePanel);
-            mainPanel.add(sumPanel);
-            mainPanel.add(controlPanel);
-            mainPanel.add(background);
-            frame.add(mainPanel);
+            this.add(gamePanel);
+            this.add(sumPanel);
+            this.add(controlPanel);
+            this.add(background);
+           // frame.add(this);
+
+           // this.validate();
+            this.revalidate();
+            this.repaint();
 
             //ZACHOWANIA PRZYCISKOW
             buttonPlay.addActionListener(
@@ -239,6 +251,7 @@ public class TestGUI implements ActionListener {
                             buttonPlay.setEnabled(false);
                             buttonPass.setEnabled(false);
                             buttonReset.setEnabled(false);
+                            buttonMenu.setEnabled(false);
 
                             Timer myTimer = new Timer();
 
@@ -257,6 +270,7 @@ public class TestGUI implements ActionListener {
 
                                     if (dealer.sum >= player.sum && dealer.sum<=21) {
                                         buttonReset.setEnabled(true);
+                                        buttonMenu.setEnabled(true);
                                         labelResult.setForeground(Color.RED);
                                         labelResult.setText("Przegrales");
                                         FundsRebalance.subtractBalance(playerFUNDS, (Integer)stakeSpinner.getValue());
@@ -268,6 +282,7 @@ public class TestGUI implements ActionListener {
 
                                         } else if (dealer.sum>21){
                                         buttonReset.setEnabled(true);
+                                        buttonMenu.setEnabled(true);
                                         labelResult.setForeground(Color.GREEN);
                                         labelResult.setText("Wygrales");
                                         FundsRebalance.addBalance(playerFUNDS, (Integer)stakeSpinner.getValue());
@@ -299,15 +314,14 @@ public class TestGUI implements ActionListener {
                         public void actionPerformed(ActionEvent e) {
 
                             final int stake=(Integer)stakeSpinner.getValue();
+                            playerStake=(Integer)stakeSpinner.getValue();
 
                             if(reset && stake>0){
-                                FundsRebalance.displayWarning(stake, playerFUNDS, frame);
+                                FundsRebalance.displayWarning(stake, playerFUNDS);
                             }
                             else
                             {
-                                BlackJack.main(new String[]{});
-                                frame.setVisible(false);
-                                frame.dispose();
+                                MainMenu.MainMenu.refreshBlackjack();
                             }
 
 
@@ -327,13 +341,11 @@ public class TestGUI implements ActionListener {
                             final int stake=(Integer)stakeSpinner.getValue();
 
                             if(reset && stake>0){
-                                FundsRebalance.displayWarningToMenu(stake, playerFUNDS, frame);
+                                FundsRebalance.displayWarningToMenu(stake, playerFUNDS);
                             }
                             else
                             {
-                                MainMenu.MainMenu.main(new String[]{});
-                                frame.setVisible(false);
-                                frame.dispose();
+                                MainMenu.MainMenu.addPanels();
                             }
 
                         }
@@ -348,13 +360,9 @@ public class TestGUI implements ActionListener {
         });
 
 
-
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
 
-    }
 
     class SimpleFrame extends JFrame {
         public SimpleFrame(int WIDTH, int HEIGHT) {
