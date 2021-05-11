@@ -1,5 +1,6 @@
 package MainMenu;
 
+import BJ.FundsRebalance;
 import SlotMachine.SlotMachine;
 
 
@@ -22,7 +23,7 @@ public class MainMenu {
     private static JPanel menuPanel;
     private static JPanel fundsPanel;
     private static JLabel imageLabel;
-    private static JLabel labelFunds;
+    public static JLabel labelFunds;
     private static JButton blackjackButton;
     private static JButton menuButton;
     private static JButton slotmachineButton;
@@ -30,7 +31,7 @@ public class MainMenu {
     private static JButton settingsButton;
     public static boolean isMusicPlaying;
 
-    private static int FUNDS;
+    public static int FUNDS;
 
     static {
         FUNDS = 0;
@@ -47,6 +48,7 @@ public class MainMenu {
         Scanner scanner= null;
         try {
             scanner = new Scanner(file);
+
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -54,6 +56,12 @@ public class MainMenu {
         if(scanner.hasNextInt())
         {
             FUNDS=scanner.nextInt();
+
+            if(FUNDS>9999)
+            {
+                FUNDS=9999;
+                FundsRebalance.subtractBalance(10000,1);
+            }
         }
 
 
@@ -209,6 +217,12 @@ public class MainMenu {
 
         frame.add(menuPanel);
         frame.add(fundsPanel);
+    }
+
+    public static void changeFunds(int value)
+    {
+        labelFunds.setText("Twoje fundusze: "+value+" $");
+        labelFunds.repaint();
     }
 
 }

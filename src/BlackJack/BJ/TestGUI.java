@@ -73,7 +73,7 @@ public class TestGUI implements ActionListener {
             labelResult.setHorizontalAlignment(JLabel.CENTER);
             labelResult.setVerticalAlignment(JLabel.CENTER);
             labelResult.setFont(new Font("Serif", Font.ITALIC, 80));
-            labelResult.setBounds(400,225,400,100);
+            labelResult.setBounds(400,228,400,100);
 
 
 
@@ -215,6 +215,7 @@ public class TestGUI implements ActionListener {
                                     labelResult.setText("Wygrales");
                                     FundsRebalance.addBalance(playerFUNDS, (Integer)stakeSpinner.getValue());
                                     playerFUNDS=playerFUNDS+(Integer)stakeSpinner.getValue();
+                                    if(playerFUNDS>9999) playerFUNDS=9999;
                                     buttonPass.setEnabled(false);
                                     buttonPlay.setEnabled(false);
                                     labelFunds.setText("Fundusze: "+playerFUNDS+"$");
@@ -271,6 +272,7 @@ public class TestGUI implements ActionListener {
                                         labelResult.setText("Wygrales");
                                         FundsRebalance.addBalance(playerFUNDS, (Integer)stakeSpinner.getValue());
                                         playerFUNDS=playerFUNDS+(Integer)stakeSpinner.getValue();
+                                        if(playerFUNDS>9999) playerFUNDS=9999;
                                         labelFunds.setText("Fundusze: "+playerFUNDS+"$");
                                         gamePanel.repaint();
                                         reset=false;

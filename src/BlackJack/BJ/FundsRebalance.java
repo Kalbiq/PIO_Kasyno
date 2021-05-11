@@ -23,6 +23,12 @@ public class FundsRebalance {
 
         try {
             FileWriter writer=new FileWriter(System.getProperty("user.dir")+"\\gameData\\playerFunds.txt");
+
+            if(playerFUNDS>9999)
+            {
+                playerFUNDS=9999;
+            }
+
             writer.write(Integer.toString(playerFUNDS));
             writer.close();
         } catch (IOException e) {
