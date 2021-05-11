@@ -24,6 +24,7 @@ public class MainMenu {
     private static JLabel imageLabel;
     private static JLabel labelFunds;
     private static JButton blackjackButton;
+    private static JButton menuButton;
     private static JButton slotmachineButton;
     private static JButton crapsButton;
     private static JButton settingsButton;
@@ -101,7 +102,7 @@ public class MainMenu {
             imageLabel.setBackground(new Color(0,0,0, 0));
 
             imagePanel.add(imageLabel);
-            frame.add(imagePanel);
+
 
             menuPanel=new JPanel();
             menuPanel.setLayout(null);
@@ -118,12 +119,10 @@ public class MainMenu {
             settingsButton=new JButton("Ustawienia");
             settingsButton.setBounds(0,240,400,60);
 
-            menuPanel.add(blackjackButton);
-            menuPanel.add(slotmachineButton);
-            menuPanel.add(crapsButton);
-            menuPanel.add(settingsButton);
+            menuButton=new JButton("menu");
+            menuButton.setBounds(1000,600,200,60);
 
-            frame.add(menuPanel);
+
 
             fundsPanel=new JPanel();
             fundsPanel.setBounds(5,615,300,50);
@@ -134,8 +133,8 @@ public class MainMenu {
             labelFunds.setFont(new Font("MV Boli", Font.BOLD, 20));
             labelFunds.setForeground(Color.white);
             fundsPanel.add(labelFunds);
-            frame.add(fundsPanel);
 
+            addPanels();
 
 
             blackjackButton.addActionListener(
@@ -159,6 +158,23 @@ public class MainMenu {
                             frame.add(new SlotMachine(FUNDS));
                             frame.revalidate();
                             frame.repaint();
+                            frame.add(menuButton);
+
+
+                        }
+
+                    }
+            );
+            menuButton.addActionListener(
+                    new ActionListener() {
+                        @Override
+                        public void actionPerformed(ActionEvent e) {
+                            frame.getContentPane().removeAll();
+                            frame.revalidate();
+                            addPanels();
+                            frame.repaint();
+
+
 
 
                         }
@@ -180,7 +196,19 @@ public class MainMenu {
             );
 
 
+
         });
+    }
+
+    private static void addPanels() {
+        frame.add(imagePanel);
+        menuPanel.add(blackjackButton);
+        menuPanel.add(slotmachineButton);
+        menuPanel.add(crapsButton);
+        menuPanel.add(settingsButton);
+
+        frame.add(menuPanel);
+        frame.add(fundsPanel);
     }
 
 }

@@ -16,7 +16,7 @@ public class SlotMachine extends JPanel implements ActionListener {
     private Slot slot3;
     private JLabel scoreLabel;
     private Image image;
-    private JButton menuButton;
+
 
     public SlotMachine(int account) {
 
@@ -24,10 +24,6 @@ public class SlotMachine extends JPanel implements ActionListener {
 
 //visual panel
         Border border = BorderFactory.createLineBorder(Color.black, 5);
-
-        menuButton = new JButton("menu");
-        menuButton.setBounds(275,400,200,60);
-
 
         slot1 = new Slot(200, 100);
         slot2 = new Slot(350, 100);
@@ -65,7 +61,6 @@ public class SlotMachine extends JPanel implements ActionListener {
         this.setLayout(null);
         this.add(machinePanel);
         this.add(scoreLabel);
-        this.add(menuButton);
         addButton();
     }
     private void addButton () {
@@ -87,10 +82,6 @@ public class SlotMachine extends JPanel implements ActionListener {
             JOptionPane.showMessageDialog(null, "Nie masz wystarczających środków");
         }
 
-        if(e.getSource() == menuButton) {
-            MainMenu.MainMenu.main(new String[]{});
-            this.setVisible(false);
-        }
     }
     
     public void play() {
@@ -136,8 +127,6 @@ public class SlotMachine extends JPanel implements ActionListener {
     }
 
     public void paintComponent(Graphics g) {
-
-
         g.drawImage(image, 0, 0, null);
     }
 
