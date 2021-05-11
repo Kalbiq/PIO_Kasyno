@@ -103,7 +103,7 @@ public class SlotMachine extends JPanel implements ActionListener {
         simulationOutput[2] = random.nextInt(7);
         slot3.setSlotImage(slots[simulationOutput[2]]);
 
-        scoreLabel.setText("Twoje fundusze: " + account + "$");
+
 
 
         if(simulationOutput[0] == simulationOutput[1] && simulationOutput[0] == simulationOutput[2]) {
@@ -136,6 +136,8 @@ public class SlotMachine extends JPanel implements ActionListener {
         }
         else
             message = "Nic nie wygrałeś";
+
+        scoreLabel.setText("Twoje fundusze: " + account + "$");
 
     }
 
