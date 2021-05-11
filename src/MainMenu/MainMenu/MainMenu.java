@@ -153,6 +153,9 @@ public class MainMenu {
 
                             frame.getContentPane().removeAll();
 
+                            BJ.BlackJack.main(new String[]{""});
+                            FUNDS=BJ.BlackJack.FUNDS;
+
                             BJ.TestGUI bj=new BJ.TestGUI(1200,700,FUNDS);
 
                             frame.add(bj);
@@ -175,6 +178,10 @@ public class MainMenu {
                         @Override
                         public void actionPerformed(ActionEvent e) {
                             frame.getContentPane().removeAll();
+
+                            BJ.BlackJack.main(new String[]{""});
+                            FUNDS=BJ.BlackJack.FUNDS;
+
                             frame.add(new SlotMachine(FUNDS));
                             frame.revalidate();
                             frame.repaint();
