@@ -3,8 +3,8 @@ package Craps;
 import java.util.Arrays;
 
 public class Bet {
-    protected final String name;
-    protected int[] numbers;
+    private final String name;
+    private int[] numbers;
     protected final int multiplier;
 
     public Bet(String name, int multiplier) {
@@ -22,17 +22,22 @@ public class Bet {
         return multiplier;
     }
 
-    public String description() {
-        return name + " (bet on " + Arrays.toString(numbers) + ")" +
-                ", multiplier = " + multiplier;
+    public String getDescription() {
+        return "Stawiasz na sumę oczek:\n" + Arrays.toString(numbers).replace("[", "")
+                .replace("]", "").replace(",", " lub") +
+                "\nKurs = " + multiplier;
     }
 
     public boolean check(int[] dice) {
         int sumDice = Arrays.stream(dice).sum();
-        for (int number:numbers) {
-            if(sumDice == number) return true;
+        for (int number : numbers) {
+            if (sumDice == number) return true;
         }
         return false;
     }
 
+    @Override
+    public String toString() {
+        return name;
+    }
 }
