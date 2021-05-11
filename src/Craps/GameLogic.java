@@ -82,7 +82,8 @@ public class GameLogic {
     }
 
     private void setStake(int stake) {
-        this.stake = stake;
+        if (stake > score) this.stake = score;
+        else this.stake = stake;
     }
 
     private void selectBet(int bet) {
