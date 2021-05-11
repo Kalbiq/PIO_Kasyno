@@ -1,14 +1,13 @@
 package Craps;
 
-public class BetHardways extends Bet{
+public class BetHardways extends Bet {
     public BetHardways(String name, int multiplier) {
         super(name, multiplier);
     }
 
     @Override
-    public String description() {
-        return name + " (bet on [2+2, 3+3, 4+4, 5+5]" + ")" +
-                    ", multiplier = " + multiplier;
+    public String getDescription() {
+        return "Stawiasz na podwójne wyrzucenie:\n2 lub 3 lub 4 lub 5\nKurs = " + multiplier;
     }
 
     @Override
