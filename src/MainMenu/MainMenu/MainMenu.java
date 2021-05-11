@@ -27,7 +27,7 @@ public class MainMenu {
     private static JButton slotmachineButton;
     private static JButton crapsButton;
     private static JButton settingsButton;
-    private static boolean isMusicPlaying;
+    public static boolean isMusicPlaying;
 
     private static int FUNDS;
 
@@ -67,7 +67,7 @@ public class MainMenu {
                 isMusicPlaying=true;
                 PlayMusic musicPlayer = new PlayMusic();
                 try {
-                    musicPlayer.playMusic(0);
+                    musicPlayer.playMusic("Nuta #1");
                 } catch (IOException e) {
                     e.printStackTrace();
                 } catch (UnsupportedAudioFileException e) {
@@ -160,6 +160,19 @@ public class MainMenu {
                             frame.revalidate();
                             frame.repaint();
 
+
+                        }
+
+                    }
+            );
+
+            settingsButton.addActionListener(
+                    new ActionListener() {
+                        @Override
+                        public void actionPerformed(ActionEvent e) {
+
+                            Settings settings=new Settings();
+                            settings.displaySettings();
 
                         }
 
