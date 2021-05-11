@@ -18,7 +18,6 @@ public class TestGUI implements ActionListener {
     private JLayeredPane playerCardsPanel;
     private JLayeredPane enemyCardsPanel;
     private JPanel buttonsPanel;
-    private JPanel resultPanel;
     private JButton buttonPlay;
     private JButton buttonPass;
     private JButton buttonMenu;
@@ -28,6 +27,8 @@ public class TestGUI implements ActionListener {
     private JLabel labelResult;
     private JLabel labelSpinner;
     private JLabel labelFunds;
+    private JLabel background;
+    private ImageIcon pokertable;
     private int playerCardsStart = 500;
     private int enemyCardsStart = 600;
     private int zPlayerOrder=0;
@@ -61,18 +62,20 @@ public class TestGUI implements ActionListener {
             mainPanel.setLayout(null);
             mainPanel.setBounds(0,0,WIDTH,HEIGHT);
 
+            pokertable = new ImageIcon(new ImageIcon(System.getProperty("user.dir")+"\\images\\pokertable.png").
+                    getImage().getScaledInstance(1185, 700, Image.SCALE_DEFAULT));
+            background = new JLabel();
+            background.setIcon(pokertable);
+            background.setBounds(0,0,1200,700);
+
 
             labelResult = new JLabel("");
             labelResult.setHorizontalAlignment(JLabel.CENTER);
             labelResult.setVerticalAlignment(JLabel.CENTER);
             labelResult.setFont(new Font("Serif", Font.ITALIC, 80));
-            labelResult.setBounds(400,190,400,100);
+            labelResult.setBounds(400,225,400,100);
 
 
-            resultPanel = new JPanel();
-            resultPanel.setBounds(400, 200, 400, 120);
-            resultPanel.setOpaque(true);
-            resultPanel.add(labelResult);
 
 
             buttonPlay = new SimpleButton("Dobierz");
@@ -87,7 +90,7 @@ public class TestGUI implements ActionListener {
 
             labelPlayer = new JLabel("Suma Twojej reki: " + player.sum);
             labelPlayer.setSize(300,50);
-            labelPlayer.setBounds(450,0,300,50);
+            labelPlayer.setBounds(450,13,300,50);
             labelPlayer.setHorizontalAlignment(JLabel.CENTER);
             labelPlayer.setFont(new Font("MV Boli", Font.BOLD, 18));
             labelPlayer.setForeground(Color.white);
@@ -100,26 +103,27 @@ public class TestGUI implements ActionListener {
             labelDealer.setFont(new Font("MV Boli", Font.BOLD, 15));
 
             labelSpinner = new JLabel("Stawka:");
-            labelSpinner.setBounds(50,15,200,50);
+            labelSpinner.setBounds(30,15,200,50);
             labelSpinner.setForeground(Color.white);
             labelSpinner.setFont(new Font("MV Boli", Font.BOLD, 20));
             stakeSpinner = new JSpinner(new SpinnerNumberModel(0,0,FUNDS,5));
             ((JSpinner.DefaultEditor) stakeSpinner.getEditor()).getTextField().setEditable(false);
-            stakeSpinner.setBounds(150,25,50,30);
+            stakeSpinner.setBounds(125,25,50,30);
 
             labelFunds= new JLabel("Fundusze: "+FUNDS+"$");
-            labelFunds.setBounds(975,15,200,50);
+            labelFunds.setBounds(1010,15,200,50);
             labelFunds.setForeground(Color.white);
             labelFunds.setFont(new Font("MV Boli", Font.BOLD, 20));
 
             gamePanel = new JPanel();
             gamePanel.setLayout(null);
+            gamePanel.setOpaque(false);
             gamePanel.setBounds(0, 81, WIDTH, 500);
             gamePanel.add(labelResult);
 
             sumPanel = new JPanel();
             sumPanel.setLayout(null);
-            sumPanel.setBackground(Color.DARK_GRAY);
+            sumPanel.setOpaque(false);
             sumPanel.setBounds(0, 0, WIDTH, 81);
             sumPanel.add(labelSpinner);
             sumPanel.add(stakeSpinner);
@@ -137,15 +141,16 @@ public class TestGUI implements ActionListener {
             controlPanel = new JPanel();
             controlPanel.setBounds(0, 581, WIDTH, 81);
             controlPanel.setLayout(null);
+            controlPanel.setOpaque(false);
             controlPanel.setBackground(Color.DARK_GRAY);
             controlPanel.add(buttonsPanel);
             controlPanel.add(buttonReset);
             controlPanel.add(buttonMenu);
 
             playerCardsPanel = new JLayeredPane();
-            playerCardsPanel.setLayout(new FlowLayout(FlowLayout.CENTER,-80,50));
+            playerCardsPanel.setLayout(new FlowLayout(FlowLayout.CENTER,-80,80));
             playerCardsPanel.setBackground(new Color(44, 173, 212));
-            playerCardsPanel.setOpaque(true);
+            playerCardsPanel.setOpaque(false);
             playerCardsPanel.setBounds(0, 250, WIDTH, 250);
             playerCardsPanel.add(new Card(System.getProperty("user.dir") +
                     "\\images\\cards\\" + player.player_hand.get(player.cards_amount - 1) +
@@ -155,8 +160,8 @@ public class TestGUI implements ActionListener {
 
             enemyCardsPanel = new JLayeredPane();
             enemyCardsPanel.setBackground(new Color(0x2CADD4));
-            enemyCardsPanel.setOpaque(true);
-            enemyCardsPanel.setLayout(new FlowLayout(FlowLayout.CENTER,-80,50));
+            enemyCardsPanel.setOpaque(false);
+            enemyCardsPanel.setLayout(new FlowLayout(FlowLayout.CENTER,-80,100));
             enemyCardsPanel.setBounds(0, 0, WIDTH, 250);
 
 
@@ -168,9 +173,11 @@ public class TestGUI implements ActionListener {
             frame.setLayout(null);
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             frame.setVisible(true);
+
             mainPanel.add(gamePanel);
             mainPanel.add(sumPanel);
             mainPanel.add(controlPanel);
+            mainPanel.add(background);
             frame.add(mainPanel);
 
             //ZACHOWANIA PRZYCISKOW
