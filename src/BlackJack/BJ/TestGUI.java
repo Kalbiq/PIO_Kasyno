@@ -14,6 +14,7 @@ public class TestGUI implements ActionListener {
     private JPanel gamePanel;
     private JPanel controlPanel;
     private JPanel sumPanel;
+    private JPanel mainPanel;
     private JLayeredPane playerCardsPanel;
     private JLayeredPane enemyCardsPanel;
     private JPanel buttonsPanel;
@@ -56,6 +57,10 @@ public class TestGUI implements ActionListener {
             frame.setResizable(false);
             frame.setLayout(null);
             frame.setIconImage(icon.getImage());
+            mainPanel =new JPanel();
+            mainPanel.setLayout(null);
+            mainPanel.setBounds(0,0,WIDTH,HEIGHT);
+
 
             labelResult = new JLabel("");
             labelResult.setHorizontalAlignment(JLabel.CENTER);
@@ -138,20 +143,20 @@ public class TestGUI implements ActionListener {
             controlPanel.add(buttonMenu);
 
             playerCardsPanel = new JLayeredPane();
-            playerCardsPanel.setLayout(null);
+            playerCardsPanel.setLayout(new FlowLayout(FlowLayout.CENTER,-80,50));
             playerCardsPanel.setBackground(new Color(44, 173, 212));
             playerCardsPanel.setOpaque(true);
             playerCardsPanel.setBounds(0, 250, WIDTH, 250);
             playerCardsPanel.add(new Card(System.getProperty("user.dir") +
                     "\\images\\cards\\" + player.player_hand.get(player.cards_amount - 1) +
-                    ".png", playerCardsStart).imageLabel, new Integer(zPlayerOrder));
+                    ".png", playerCardsStart).imageLabel, Integer.valueOf(zPlayerOrder));
             zPlayerOrder++;
             gamePanel.add(playerCardsPanel);
 
             enemyCardsPanel = new JLayeredPane();
             enemyCardsPanel.setBackground(new Color(0x2CADD4));
             enemyCardsPanel.setOpaque(true);
-            enemyCardsPanel.setLayout(null);
+            enemyCardsPanel.setLayout(new FlowLayout(FlowLayout.CENTER,-80,50));
             enemyCardsPanel.setBounds(0, 0, WIDTH, 250);
 
 
@@ -163,9 +168,10 @@ public class TestGUI implements ActionListener {
             frame.setLayout(null);
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             frame.setVisible(true);
-            frame.add(gamePanel);
-            frame.add(sumPanel);
-            frame.add(controlPanel);
+            mainPanel.add(gamePanel);
+            mainPanel.add(sumPanel);
+            mainPanel.add(controlPanel);
+            frame.add(mainPanel);
 
             //ZACHOWANIA PRZYCISKOW
             buttonPlay.addActionListener(
@@ -181,7 +187,7 @@ public class TestGUI implements ActionListener {
                                     playerCardsStart += 25;
                                     playerCardsPanel.add(new Card(System.getProperty("user.dir") +
                                             "\\images\\cards\\" + player.player_hand.get(player.cards_amount - 1) +
-                                            ".png", playerCardsStart).imageLabel,new Integer(zPlayerOrder));
+                                            ".png", playerCardsStart).imageLabel, Integer.valueOf(zPlayerOrder));
                                     zPlayerOrder++;
                                     playerCardsPanel.repaint();
                                     labelPlayer.setText("Suma Twojej reki: " + player.sum);
@@ -234,7 +240,7 @@ public class TestGUI implements ActionListener {
                                     dealer.addCard(deck.drawCard());
                                     enemyCardsPanel.add(new Card(System.getProperty("user.dir") +
                                             "\\images\\cards\\" + dealer.player_hand.get(dealer.cards_amount - 1) +
-                                            ".png", enemyCardsStart).imageLabel,new Integer(zEnemyOrder));
+                                            ".png", enemyCardsStart).imageLabel, Integer.valueOf(zEnemyOrder));
                                     zEnemyOrder++;
                                     enemyCardsStart -= 25;
                                     enemyCardsPanel.repaint();
