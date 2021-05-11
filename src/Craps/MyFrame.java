@@ -38,7 +38,7 @@ public class MyFrame extends JFrame implements ActionListener {
         playContainer.setLayout(new BoxLayout(playContainer, BoxLayout.Y_AXIS));
 
         // Bet Container
-        stakeSpinner = new JSpinner(new SpinnerNumberModel(5,5,100,5));
+        stakeSpinner = new JSpinner(new SpinnerNumberModel(5,5,Integer.MAX_VALUE,5));
         stakeSpinner.setSize(30, 10);
 
         betContainer.add(stakeSpinner);
