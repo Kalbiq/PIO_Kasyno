@@ -32,6 +32,7 @@ public class SlotMachine extends JPanel implements ActionListener {
         slot3 = new Slot(500, 100);
 
 
+
         machinePanel = new JPanel();
         machinePanel.setBounds(200, 50, 350, 125);
         machinePanel.setBorder(border);
@@ -52,6 +53,8 @@ public class SlotMachine extends JPanel implements ActionListener {
         scoreLabel.setHorizontalAlignment(JLabel.CENTER);
         scoreLabel.setBounds(225, 200, 300, 50);
         scoreLabel.setBorder(border);
+        scoreLabel.setBackground(new Color(255, 255, 255, 255));
+
 
 
 //Frame

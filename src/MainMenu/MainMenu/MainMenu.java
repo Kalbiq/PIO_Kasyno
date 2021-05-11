@@ -30,6 +30,9 @@ public class MainMenu {
     private static JButton slotmachineButton;
     private static JButton crapsButton;
     private static JButton settingsButton;
+    private static JLabel background;
+    private static ImageIcon menuBg;
+    private static ImageIcon slotBg;
     public static boolean isMusicPlaying;
 
     public static int FUNDS;
@@ -70,6 +73,8 @@ public class MainMenu {
         EventQueue.invokeLater(() ->
         {
 
+
+
             Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
             ImageIcon icon= new ImageIcon(System.getProperty("user.dir")+"\\images\\iconBlackjack.png");
 
@@ -95,7 +100,16 @@ public class MainMenu {
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             frame.setVisible(true);
             frame.setIconImage(icon.getImage());
-            frame.getContentPane().setBackground( new Color(255, 167, 167) );
+           // frame.getContentPane().setBackground( new Color(71, 56, 56) );
+
+            menuBg = new ImageIcon(new ImageIcon(System.getProperty("user.dir")+"\\images\\casino.png").
+                    getImage().getScaledInstance(1185, 700, Image.SCALE_DEFAULT));
+            slotBg = new ImageIcon(new ImageIcon(System.getProperty("user.dir")+"\\images\\slotbg.png").
+                    getImage().getScaledInstance(1185, 700, Image.SCALE_DEFAULT));
+            background = new JLabel();
+            background.setIcon(menuBg);
+            background.setBounds(0,0,1200,700);
+            background.setOpaque(true);
 
             imagePanel=new JPanel();
             imagePanel.setLayout(null);
@@ -116,8 +130,8 @@ public class MainMenu {
             menuPanel=new JPanel();
             menuPanel.setLayout(null);
             menuPanel.setBounds(400,300,400,320);
-            menuPanel.setOpaque(true);
-            menuPanel.setBackground(new Color(255, 167, 167));
+            menuPanel.setOpaque(false);
+           // menuPanel.setBackground(new Color(71, 56, 56));
 
             blackjackButton=new JButton("Blackjack");
             blackjackButton.setBounds(0,0,400,60);
@@ -134,13 +148,15 @@ public class MainMenu {
 
 
             fundsPanel=new JPanel();
+            fundsPanel.setOpaque(false);
             fundsPanel.setBounds(5,615,300,50);
-            fundsPanel.setBackground(new Color(255, 167, 167));
+           // fundsPanel.setBackground(new Color(71, 56, 56));
 
             labelFunds=new JLabel("Twoje fundusze: "+FUNDS+" $");
             labelFunds.setBounds(0,0,300,50);
             labelFunds.setFont(new Font("MV Boli", Font.BOLD, 20));
             labelFunds.setForeground(Color.white);
+            labelFunds.setOpaque(false);
             fundsPanel.add(labelFunds);
 
             addPanels();
@@ -179,6 +195,8 @@ public class MainMenu {
                         public void actionPerformed(ActionEvent e) {
                             frame.getContentPane().removeAll();
 
+
+                            background.setIcon(slotBg);
                             BJ.BlackJack.main(new String[]{""});
                             FUNDS=BJ.BlackJack.FUNDS;
 
@@ -186,6 +204,7 @@ public class MainMenu {
                             frame.revalidate();
                             frame.repaint();
                             frame.add(menuButton);
+                            frame.add(background);
 
 
                         }
@@ -231,6 +250,8 @@ public class MainMenu {
 
         frame.getContentPane().removeAll();
 
+        background.setIcon(menuBg);
+
         frame.repaint();
         frame.revalidate();
 
@@ -247,6 +268,7 @@ public class MainMenu {
 
         frame.add(menuPanel);
         frame.add(fundsPanel);
+        frame.add(background);
 
         frame.repaint();
         frame.revalidate();
