@@ -30,7 +30,7 @@ public class BlackJack {
 
         TestGUI gui=new TestGUI();
 
-        gui.createWindow(1200,738, FUNDS);
+        gui.createWindow(1200,700, FUNDS);
 
      /*   Deck e= new Deck();
         e.shuffleDeck();
