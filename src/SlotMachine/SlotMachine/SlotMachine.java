@@ -7,7 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Random;
 
-public class SlotMachine extends JFrame implements ActionListener {
+public class SlotMachine extends JPanel implements ActionListener {
     private int account;
     private JButton button;
     private JPanel machinePanel;
@@ -15,7 +15,8 @@ public class SlotMachine extends JFrame implements ActionListener {
     private Slot slot2;
     private Slot slot3;
     private JLabel scoreLabel;
-    
+    private Image image;
+
 
     public SlotMachine(int account) {
 
@@ -23,18 +24,14 @@ public class SlotMachine extends JFrame implements ActionListener {
 
 //visual panel
         Border border = BorderFactory.createLineBorder(Color.black, 5);
-        //ImageIcon machineImage = new ImageIcon("images/machine.png");
 
-       // JLabel machineLabel = new JLabel();
-       // machineLabel.setIcon(machineImage);
-        //machineLabel.setBounds(0, 0, 600, 600);
+        slot1 = new Slot(200, 100);
+        slot2 = new Slot(350, 100);
+        slot3 = new Slot(500, 100);
 
-        slot1 = new Slot(100, 100);
-        slot2 = new Slot(250, 100);
-        slot3 = new Slot(400, 100);
 
         machinePanel = new JPanel();
-        machinePanel.setBounds(100, 50, 400, 150);
+        machinePanel.setBounds(200, 50, 350, 125);
         machinePanel.setBorder(border);
 
         machinePanel.add(slot1);
@@ -51,28 +48,24 @@ public class SlotMachine extends JFrame implements ActionListener {
         scoreLabel.setOpaque(true);
         scoreLabel.setVerticalAlignment(JLabel.BOTTOM);
         scoreLabel.setHorizontalAlignment(JLabel.CENTER);
-        scoreLabel.setBounds(100, 350, 300, 150);
+        scoreLabel.setBounds(225, 200, 300, 50);
         scoreLabel.setBorder(border);
 
-        JPanel scorePanel = new JPanel();
-        scorePanel.setBounds(100, 350, 400, 150);
-        scorePanel.add(scoreLabel);
-        scorePanel.add(scoreLabel);
 
 //Frame
-        this.setTitle("Jednoręki Bandyta");
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // wychodzi z aplikacji po klknieciu krzyzyka
-        this.setResizable(false);
+
         this.setSize(700, 500);  //x -dimension, y-dimesnsion
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+        this.setLocation(200, 100);
         this.setVisible(true);
         this.setLayout(null);
         this.add(machinePanel);
-        this.add(scorePanel);
+        this.add(scoreLabel);
         addButton();
     }
     private void addButton () {
         button = new JButton();
-        button.setBounds(175, 225, 250, 100);
+        button.setBounds(250, 275, 250, 100);
         button.setText("Graj!");
         button.addActionListener(this);
         button.setFocusable(false);
@@ -82,9 +75,13 @@ public class SlotMachine extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(e.getSource()==button) {
+        if(e.getSource()==button && account >= 15) {
             play();
         }
+        else if(e.getSource() == button && account < 15) {
+            JOptionPane.showMessageDialog(null, "Nie masz wystarczających środków");
+        }
+
     }
     
     public void play() {
@@ -93,7 +90,7 @@ public class SlotMachine extends JFrame implements ActionListener {
         var simulationOutput = new int[]{-1, -1, -1};
         String message;
 
-        account -= 3;
+        account -= 10;
         simulationOutput[0] = random.nextInt(7);
         slot1.setSlotImage(slots[simulationOutput[0]]);
 
@@ -107,19 +104,35 @@ public class SlotMachine extends JFrame implements ActionListener {
 
 
         if(simulationOutput[0] == simulationOutput[1] && simulationOutput[0] == simulationOutput[2]) {
-            message = "Wygrałeś 10$";
-            account += 10;
+            if(simulationOutput[0] == 2)
+                account += 100;
+            else if(simulationOutput[0] == 6)
+                account += 50;
+            else
+                account += 20;
+            message = "Wygrałeś 20$";
+
         }
         else if(simulationOutput[0] == simulationOutput[1] || simulationOutput[0] == simulationOutput[2]) {
-            message = "Wygrałeś 5$";
-            account += 5;
+            message = "Wygrałeś 15$";
+            account += 15;
         }
         else if(simulationOutput[1] == simulationOutput[2]) {
-            message = "Wygrałeś 5$";
-            account +=5;
+            message = "Wygrałeś 15$";
+            account += 15;
         }
         else
             message = "Nic nie wygrałeś";
 
     }
+
+    public void paintComponent(Graphics g) {
+        g.drawImage(image, 0, 0, null);
+    }
+
+
+
+
+
+
 }

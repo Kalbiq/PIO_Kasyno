@@ -1,5 +1,8 @@
 package MainMenu;
 
+import SlotMachine.SlotMachine;
+
+
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.*;
@@ -21,10 +24,11 @@ public class MainMenu {
     private static JLabel imageLabel;
     private static JLabel labelFunds;
     private static JButton blackjackButton;
+    private static JButton menuButton;
     private static JButton slotmachineButton;
     private static JButton crapsButton;
     private static JButton settingsButton;
-    private static boolean isMusicPlaying;
+    public static boolean isMusicPlaying;
 
     private static int FUNDS;
 
@@ -64,7 +68,7 @@ public class MainMenu {
                 isMusicPlaying=true;
                 PlayMusic musicPlayer = new PlayMusic();
                 try {
-                    musicPlayer.playMusic(0);
+                    musicPlayer.playMusic("Nuta #1");
                 } catch (IOException e) {
                     e.printStackTrace();
                 } catch (UnsupportedAudioFileException e) {
@@ -98,7 +102,7 @@ public class MainMenu {
             imageLabel.setBackground(new Color(0,0,0, 0));
 
             imagePanel.add(imageLabel);
-            frame.add(imagePanel);
+
 
             menuPanel=new JPanel();
             menuPanel.setLayout(null);
@@ -115,12 +119,10 @@ public class MainMenu {
             settingsButton=new JButton("Ustawienia");
             settingsButton.setBounds(0,240,400,60);
 
-            menuPanel.add(blackjackButton);
-            menuPanel.add(slotmachineButton);
-            menuPanel.add(crapsButton);
-            menuPanel.add(settingsButton);
+            menuButton=new JButton("menu");
+            menuButton.setBounds(1000,600,200,60);
 
-            frame.add(menuPanel);
+
 
             fundsPanel=new JPanel();
             fundsPanel.setBounds(5,615,300,50);
@@ -131,14 +133,15 @@ public class MainMenu {
             labelFunds.setFont(new Font("MV Boli", Font.BOLD, 20));
             labelFunds.setForeground(Color.white);
             fundsPanel.add(labelFunds);
-            frame.add(fundsPanel);
 
+            addPanels();
 
 
             blackjackButton.addActionListener(
                     new ActionListener() {
                         @Override
                         public void actionPerformed(ActionEvent e) {
+
                             frame.setVisible(false);
                             frame.dispose();
                             BJ.BlackJack.main(new String[]{});
@@ -147,9 +150,65 @@ public class MainMenu {
 
                     }
             );
+            slotmachineButton.addActionListener(
+                    new ActionListener() {
+                        @Override
+                        public void actionPerformed(ActionEvent e) {
+                            frame.getContentPane().removeAll();
+                            frame.add(new SlotMachine(FUNDS));
+                            frame.revalidate();
+                            frame.repaint();
+                            frame.add(menuButton);
+
+
+                        }
+
+                    }
+            );
+            menuButton.addActionListener(
+                    new ActionListener() {
+                        @Override
+                        public void actionPerformed(ActionEvent e) {
+                            frame.getContentPane().removeAll();
+                            frame.revalidate();
+                            addPanels();
+                            frame.repaint();
+
+
+
+
+                        }
+
+                    }
+            );
+
+            settingsButton.addActionListener(
+                    new ActionListener() {
+                        @Override
+                        public void actionPerformed(ActionEvent e) {
+
+                            Settings settings=new Settings();
+                            settings.displaySettings();
+
+                        }
+
+                    }
+            );
+
 
 
         });
+    }
+
+    private static void addPanels() {
+        frame.add(imagePanel);
+        menuPanel.add(blackjackButton);
+        menuPanel.add(slotmachineButton);
+        menuPanel.add(crapsButton);
+        menuPanel.add(settingsButton);
+
+        frame.add(menuPanel);
+        frame.add(fundsPanel);
     }
 
 }
