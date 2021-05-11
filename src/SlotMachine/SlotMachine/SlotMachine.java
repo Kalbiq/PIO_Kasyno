@@ -1,5 +1,7 @@
 package SlotMachine;
 
+import BJ.BlackJack;
+import BJ.FundsRebalance;
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
@@ -19,8 +21,8 @@ public class SlotMachine extends JPanel implements ActionListener {
 
 
     public SlotMachine(int account) {
-
-        this.account = account;
+        BJ.BlackJack.main(new String[] {","});
+        this.account = BlackJack.FUNDS;
 
 //visual panel
         Border border = BorderFactory.createLineBorder(Color.black, 5);
@@ -75,10 +77,10 @@ public class SlotMachine extends JPanel implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(e.getSource()==button && account >= 15) {
+        if(e.getSource()==button && account >= 10) {
             play();
         }
-        else if(e.getSource() == button && account < 15) {
+        else if(e.getSource() == button && account < 10) {
             JOptionPane.showMessageDialog(null, "Nie masz wystarczających środków");
         }
 
@@ -90,6 +92,7 @@ public class SlotMachine extends JPanel implements ActionListener {
         var simulationOutput = new int[]{-1, -1, -1};
         String message;
 
+        FundsRebalance.subtractBalance(account,10);
         account -= 10;
         simulationOutput[0] = random.nextInt(7);
         slot1.setSlotImage(slots[simulationOutput[0]]);
@@ -100,29 +103,41 @@ public class SlotMachine extends JPanel implements ActionListener {
         simulationOutput[2] = random.nextInt(7);
         slot3.setSlotImage(slots[simulationOutput[2]]);
 
-        scoreLabel.setText("Twoje fundusze: " + account + "$");
+
 
 
         if(simulationOutput[0] == simulationOutput[1] && simulationOutput[0] == simulationOutput[2]) {
-            if(simulationOutput[0] == 2)
+            if(simulationOutput[0] == 2) {
+                FundsRebalance.addBalance(account,100);
                 account += 100;
-            else if(simulationOutput[0] == 6)
+            }
+            else if(simulationOutput[0] == 6) {
+                FundsRebalance.addBalance(account,50);
                 account += 50;
-            else
+            }
+            else {
+                FundsRebalance.addBalance(account,20);
                 account += 20;
+            }
             message = "Wygrałeś 20$";
 
         }
         else if(simulationOutput[0] == simulationOutput[1] || simulationOutput[0] == simulationOutput[2]) {
             message = "Wygrałeś 15$";
+            FundsRebalance.addBalance(account,15);
             account += 15;
+
         }
         else if(simulationOutput[1] == simulationOutput[2]) {
             message = "Wygrałeś 15$";
+            FundsRebalance.addBalance(account,15);
             account += 15;
+
         }
         else
             message = "Nic nie wygrałeś";
+
+        scoreLabel.setText("Twoje fundusze: " + account + "$");
 
     }
 

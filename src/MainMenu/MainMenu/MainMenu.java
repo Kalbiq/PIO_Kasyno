@@ -1,5 +1,7 @@
 package MainMenu;
 
+import BJ.BlackJack;
+import BJ.FundsRebalance;
 import SlotMachine.SlotMachine;
 
 
@@ -22,7 +24,7 @@ public class MainMenu {
     private static JPanel menuPanel;
     private static JPanel fundsPanel;
     private static JLabel imageLabel;
-    private static JLabel labelFunds;
+    public static JLabel labelFunds;
     private static JButton blackjackButton;
     private static JButton menuButton;
     private static JButton slotmachineButton;
@@ -30,7 +32,7 @@ public class MainMenu {
     private static JButton settingsButton;
     public static boolean isMusicPlaying;
 
-    private static int FUNDS;
+    public static int FUNDS;
 
     static {
         FUNDS = 0;
@@ -47,6 +49,7 @@ public class MainMenu {
         Scanner scanner= null;
         try {
             scanner = new Scanner(file);
+
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -54,6 +57,12 @@ public class MainMenu {
         if(scanner.hasNextInt())
         {
             FUNDS=scanner.nextInt();
+
+            if(FUNDS>9999)
+            {
+                FUNDS=9999;
+                FundsRebalance.subtractBalance(10000,1);
+            }
         }
 
 
@@ -142,9 +151,23 @@ public class MainMenu {
                         @Override
                         public void actionPerformed(ActionEvent e) {
 
-                            frame.setVisible(false);
-                            frame.dispose();
-                            BJ.BlackJack.main(new String[]{});
+                            frame.getContentPane().removeAll();
+
+                            BJ.BlackJack.main(new String[]{""});
+                            FUNDS=BJ.BlackJack.FUNDS;
+
+                            BJ.TestGUI bj=new BJ.TestGUI(1200,700,FUNDS);
+
+                            frame.add(bj);
+
+
+                            frame.validate();
+                            bj.validate();
+
+                            frame.repaint();
+                            frame.revalidate();
+
+
 
                         }
 
@@ -155,6 +178,10 @@ public class MainMenu {
                         @Override
                         public void actionPerformed(ActionEvent e) {
                             frame.getContentPane().removeAll();
+
+                            BJ.BlackJack.main(new String[]{""});
+                            FUNDS=BJ.BlackJack.FUNDS;
+
                             frame.add(new SlotMachine(FUNDS));
                             frame.revalidate();
                             frame.repaint();
@@ -200,7 +227,18 @@ public class MainMenu {
         });
     }
 
-    private static void addPanels() {
+    public static void addPanels() {
+
+        frame.getContentPane().removeAll();
+
+        frame.repaint();
+        frame.revalidate();
+
+        BlackJack.main(new String[]{"",});
+        FUNDS=BlackJack.FUNDS;
+
+        labelFunds.setText("Twoje fundusze: "+FUNDS+" $");
+
         frame.add(imagePanel);
         menuPanel.add(blackjackButton);
         menuPanel.add(slotmachineButton);
@@ -209,6 +247,47 @@ public class MainMenu {
 
         frame.add(menuPanel);
         frame.add(fundsPanel);
+
+        frame.repaint();
+        frame.revalidate();
+
+    }
+
+    public static void changeFunds(int value)
+    {
+        labelFunds.setText("Twoje fundusze: "+value+" $");
+        labelFunds.repaint();
+    }
+
+    public static void refreshBlackjack()
+    {
+        frame.getContentPane().removeAll();
+
+
+        BlackJack.main(new String[]{"",});
+        FUNDS=BlackJack.FUNDS;
+
+
+        BJ.TestGUI bj=new BJ.TestGUI(1200,700,FUNDS);
+
+        frame.add(bj);
+
+
+        frame.validate();
+        bj.validate();
+
+        frame.repaint();
+        frame.revalidate();
+
+
+
+    }
+
+    public static void refreshFunds(int value)
+    {
+        System.out.println("refreshFunds");
+        FUNDS-=value;
+        refreshBlackjack();
     }
 
 }

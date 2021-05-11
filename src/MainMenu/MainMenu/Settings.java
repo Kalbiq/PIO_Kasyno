@@ -1,5 +1,7 @@
 package MainMenu;
 
+import BJ.FundsRebalance;
+
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.*;
@@ -21,11 +23,14 @@ public class Settings implements ChangeListener {
     private static JPanel musicChoicePanel;
     private static JPanel musicVolumePanel;
     private static JPanel setDefaultFundsPanel;
-    private static JPanel aboutCreatorsPanel;
+    private static JPanel infoPanel;
     private static JLabel mainText;
     private static JLabel musicTextLabel;
     private static JLabel musicVolumeLabel;
+    private static JLabel fundsLabel;
+    private static JLabel infoLabel;
     private static JButton musicListButton;
+    private static JButton fundsButton;
     private static JComboBox musicList;
     private static JSlider musicSlider;
     private static String[] music;
@@ -56,7 +61,7 @@ public class Settings implements ChangeListener {
         frame.setResizable(false);
         frame.setVisible(true);
         frame.setIconImage(icon.getImage());
-        frame.getContentPane().setBackground( new Color(255, 167, 167) );
+        frame.getContentPane().setBackground( new Color(31, 30, 30) );
 
         mainPanel=new JPanel();
         mainPanel.setLayout(null);
@@ -90,10 +95,10 @@ public class Settings implements ChangeListener {
 
         musicList=new JComboBox(music);
         musicList.setSelectedIndex(0);
-        musicList.setBounds(100,25,175,50);
+        musicList.setBounds(110,25,175,50);
 
         musicListButton=new JButton("Wybierz");
-        musicListButton.setBounds(300,25,175,50);
+        musicListButton.setBounds(310,25,175,50);
 
         musicChoicePanel.add(musicTextLabel);
         musicChoicePanel.add(musicList);
@@ -120,8 +125,8 @@ public class Settings implements ChangeListener {
 
         musicSlider.setMajorTickSpacing(10);
         musicSlider.setMinorTickSpacing(1);
-        musicSlider.setBounds(100,40,200,50);
-        musicSlider.setBackground(new Color(255, 167, 167));
+        musicSlider.setBounds(105,40,200,50);
+        musicSlider.setBackground(new Color(31, 30, 30));
         musicSlider.setForeground(Color.white);
         musicSlider.setPaintTicks(true);
         musicSlider.setPaintLabels(true);
@@ -137,22 +142,38 @@ public class Settings implements ChangeListener {
         setDefaultFundsPanel.setOpaque(false);
         //setDefaultFundsPanel.setBackground(Color.blue);
 
+        fundsLabel=new JLabel("Fundusze: ");
+        fundsLabel.setBounds(0,0,200,100);
+        fundsLabel.setForeground(Color.white);
+        fundsLabel.setFont(new Font("MV Boli", Font.BOLD, 20));
 
-        aboutCreatorsPanel=new JPanel();
-        aboutCreatorsPanel.setLayout(null);
-        aboutCreatorsPanel.setBounds(0,300,500,100);
-        aboutCreatorsPanel.setOpaque(false);
-        //aboutCreatorsPanel.setBackground(Color.yellow);
+        fundsButton=new JButton("Reset: 500$");
+        fundsButton.setBounds(110,25,175,50);
+
+
+        setDefaultFundsPanel.add(fundsLabel);
+        setDefaultFundsPanel.add(fundsButton);
+
+
+        infoPanel=new JPanel();
+        infoPanel.setLayout(null);
+        infoPanel.setBounds(0,300,500,100);
+        infoPanel.setOpaque(false);
+
+        infoLabel=new JLabel("Maksymalna kwota do zdobycia: 9999$");
+        infoLabel.setBounds(0,0,500,100);
+        infoLabel.setForeground(Color.white);
+        infoLabel.setFont(new Font("MV Boli", Font.BOLD, 20));
+
+        infoPanel.add(infoLabel);
 
         settingsPanel.add(musicChoicePanel);
         settingsPanel.add(musicVolumePanel);
         settingsPanel.add(setDefaultFundsPanel);
-        settingsPanel.add(aboutCreatorsPanel);
+        settingsPanel.add(infoPanel);
 
 
         mainPanel.add(settingsPanel);
-
-
 
 
 
@@ -186,6 +207,19 @@ public class Settings implements ChangeListener {
                     }
             );
 
+            fundsButton.addActionListener(
+                    new ActionListener() {
+                        @Override
+                        public void actionPerformed(ActionEvent e) {
+
+                            FundsRebalance.addBalance(495,5);
+                            MainMenu.changeFunds(500);
+
+                        }
+
+                    }
+            );
+
         });
 
     }
@@ -194,6 +228,7 @@ public class Settings implements ChangeListener {
     public void stateChanged(ChangeEvent e) {
 
             PlayMusic.ChangeVolume(musicSlider.getValue());
+
 
     }
 }
