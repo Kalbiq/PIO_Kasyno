@@ -3,16 +3,12 @@ package Craps;
 import javax.swing.*;
 
 public class DiceImg extends JLabel {
-    private int x;
-    private int y;
     ImageIcon img;
     String imgName;
 
-    public DiceImg(int x, int y){
-        this.x = x;
-        this.y = y;
+    public DiceImg(){
         this.imgName = "dice1";
-        setBounds(x, y, 100, 100);
+        setSize(100, 100);
         setImg(imgName);
     }
 

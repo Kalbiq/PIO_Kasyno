@@ -1,5 +1,9 @@
 package Craps;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -13,7 +17,19 @@ public class GameLogic {
     List<Bet> bets = new ArrayList<>();
 
     public GameLogic() {
-        this.score = 100;
+        File playerFunds = new File(System.getProperty("user.dir") + "/gameData/playerFunds.txt");
+
+        Scanner scanner = null;
+        try {
+            scanner = new Scanner(playerFunds);
+            if(scanner.hasNextInt())
+            {
+                this.score = scanner.nextInt();
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
         this.sumDice = 0;
         this.bet = 0;
         this.stake = 0;
@@ -53,7 +69,7 @@ public class GameLogic {
         return bets;
     }
 
-    public void rollDice() {
+    private void rollDice() {
         int roll;
         this.sumDice = 0;
 
@@ -65,22 +81,34 @@ public class GameLogic {
         this.sumDice = this.dice[0] + this.dice[1];
     }
 
-    public void setStake(int stake) {
+    private void setStake(int stake) {
         this.stake = stake;
     }
 
-    public void selectBet(int bet) {
+    private void selectBet(int bet) {
         this.bet = bet;
     }
 
-    public boolean checkResult() {
+    private void changeScore(int dif) {
+        this.score += dif;
+
+        try {
+            FileWriter writer = new FileWriter(System.getProperty("user.dir")+"/gameData/playerFunds.txt");
+            writer.write(Integer.toString(this.score));
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private boolean checkResult() {
         Bet selectedBet = bets.get(bet);
         if (selectedBet.check(dice)) {
-            score += selectedBet.getMultiplier() * stake;
+            this.changeScore(selectedBet.getMultiplier() * stake);
             return true;
         }
         else {
-            score -= stake;
+            this.changeScore(this.stake * (-1));
             return false;
         }
     }
@@ -92,5 +120,4 @@ public class GameLogic {
 
         return checkResult();
     }
-
 }
