@@ -30,6 +30,7 @@ public class MainMenu {
     private static JButton slotmachineButton;
     private static JButton crapsButton;
     private static JButton settingsButton;
+    private static JButton invisibleButton;
     private static JLabel background;
     private static ImageIcon menuBg;
     private static ImageIcon slotBg;
@@ -44,8 +45,6 @@ public class MainMenu {
         FUNDS = 0;
         isMusicPlaying=false;
     }
-
-
 
 
     public static void main(String[] args)
@@ -140,15 +139,25 @@ public class MainMenu {
 
             blackjackButton=new JButton("Blackjack");
             blackjackButton.setBounds(0,0,400,60);
+            blackjackButton.setBackground(new Color(45, 39, 39));
+            blackjackButton.setForeground(Color.white);
             slotmachineButton=new JButton("Jednoręki Bandyta");
             slotmachineButton.setBounds(0,80,400,60);
+            slotmachineButton.setBackground(new Color(45, 39, 39));
+            slotmachineButton.setForeground(Color.white);
             crapsButton=new JButton("Kości");
             crapsButton.setBounds(0,160,400,60);
+            crapsButton.setBackground(new Color(45, 39, 39));
+            crapsButton.setForeground(Color.white);
             settingsButton=new JButton("Ustawienia");
             settingsButton.setBounds(0,240,400,60);
+            settingsButton.setBackground(new Color(45, 39, 39));
+            settingsButton.setForeground(Color.white);
+            invisibleButton=new JButton();
+            invisibleButton.setBounds(0,0,0,0);
 
-            menuButton=new JButton("menu");
-            menuButton.setBounds(1000,600,200,60);
+            menuButton=new JButton("Menu");
+            menuButton.setBounds(15,585,200,60);
 
 
 
@@ -291,6 +300,7 @@ public class MainMenu {
         labelFunds.setText("Twoje fundusze: "+FUNDS+" $");
 
         frame.add(imagePanel);
+        menuPanel.add(invisibleButton);
         menuPanel.add(blackjackButton);
         menuPanel.add(slotmachineButton);
         menuPanel.add(crapsButton);
