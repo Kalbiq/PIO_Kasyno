@@ -272,6 +272,27 @@ public class MainMenu {
 
         frame.getContentPane().removeAll();
 
+        File file = new File(System.getProperty("user.dir")+"/gameData/playerFunds.txt");
+
+        Scanner scanner= null;
+        try {
+            scanner = new Scanner(file);
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        if(scanner.hasNextInt())
+        {
+            FUNDS=scanner.nextInt();
+
+            if(FUNDS>9999)
+            {
+                FUNDS=9999;
+                FundsRebalance.subtractBalance(10000,1);
+            }
+        }
+
         background.setIcon(menuBg);
 
         frame.repaint();
