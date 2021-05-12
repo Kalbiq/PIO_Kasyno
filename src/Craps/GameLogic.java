@@ -31,9 +31,9 @@ public class GameLogic {
         this.bet = 0;
         this.stake = 0;
 
-        Bet betBoxcars = new Bet("Boxcars", new int[]{2, 12}, 30);
+        Bet betBoxcars = new Bet("Boxcars", new int[]{2, 12}, 12);
         bets.add(betBoxcars);
-        Bet betAceyDeucey = new Bet("Acey Deucey", new int[]{3}, 16);
+        Bet betAceyDeucey = new Bet("Acey Deucey", new int[]{3}, 9);
         bets.add(betAceyDeucey);
         Bet betCraps = new Bet("Craps", new int[]{2, 3, 12}, 8);
         bets.add(betCraps);
