@@ -9,8 +9,12 @@ import java.io.InputStream;
 public class PlayMusic {
 
     public static Clip clip;
+    public static int reduceVolume;
+    static{
+        reduceVolume=0;
+    }
 
-    public static void playMusic(String game) throws IOException, UnsupportedAudioFileException, LineUnavailableException {
+    public static String playMusic(String game) throws IOException, UnsupportedAudioFileException, LineUnavailableException {
         String musicPath;
 
 
@@ -53,12 +57,13 @@ public class PlayMusic {
             clip.loop(Clip.LOOP_CONTINUOUSLY);
         }
 
+        return musicPath;
 
     }
 
     public static void ChangeVolume(int value)
     {
-        int reduceVolume=10-value;
+        reduceVolume=10-value;
 
         if(value==0) reduceVolume=200;
 
@@ -66,6 +71,11 @@ public class PlayMusic {
         FloatControl gainControl =
                 (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
         gainControl.setValue(-(float)(reduceVolume*5));
+    }
+
+    public static int returnReduceVolume()
+    {
+        return reduceVolume;
     }
 
 }
