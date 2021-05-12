@@ -20,25 +20,34 @@ public class CrapsPanel extends JPanel implements ActionListener {
     public CrapsPanel() {
         //super("Gra w kości");
         gameLogic = new GameLogic();
-        this.setSize(1185, 700);
+        this.setSize(new Dimension(1195, 650));
+        this.setMaximumSize(new Dimension(1195, 695));
         this.setMinimumSize(new Dimension(600, 400));
+        this.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        this.setAlignmentY(Component.CENTER_ALIGNMENT);
+        this.setOpaque(false);
 
         JPanel mainContainer = new JPanel();
-        mainContainer.setLayout(new BoxLayout(mainContainer, BoxLayout.X_AXIS));
-        mainContainer.setBorder(BorderFactory.createLineBorder(Color.YELLOW, 5));
+        mainContainer.setLayout(new BoxLayout(mainContainer, BoxLayout.Y_AXIS));
+        mainContainer.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+        mainContainer.setAlignmentY(Component.CENTER_ALIGNMENT);
+        mainContainer.setOpaque(false);
 
         JPanel optionsContainer = new JPanel();
         optionsContainer.setLayout(new BoxLayout(optionsContainer, BoxLayout.Y_AXIS));
-        optionsContainer.setMaximumSize(new Dimension(300, 2000));
-        optionsContainer.setBorder(BorderFactory.createLineBorder(Color.BLACK, 5));
-        optionsContainer.setAlignmentX(Component.RIGHT_ALIGNMENT);
-        optionsContainer.setAlignmentY(Component.TOP_ALIGNMENT);
+        optionsContainer.setMaximumSize(new Dimension(500, 400));
+        optionsContainer.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+        optionsContainer.setAlignmentX(Component.CENTER_ALIGNMENT);
+        optionsContainer.setAlignmentY(Component.CENTER_ALIGNMENT);
+        optionsContainer.setOpaque(false);
 
         JPanel playContainer = new JPanel();
         playContainer.setLayout(new BoxLayout(playContainer, BoxLayout.Y_AXIS));
-        playContainer.setBorder(BorderFactory.createLineBorder(Color.RED, 5));
-        playContainer.setAlignmentX(Component.RIGHT_ALIGNMENT);
-        playContainer.setAlignmentY(Component.TOP_ALIGNMENT);
+        playContainer.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+        playContainer.setAlignmentX(Component.CENTER_ALIGNMENT);
+        playContainer.setAlignmentY(Component.CENTER_ALIGNMENT);
+        playContainer.setOpaque(false);
 
         // Options Container
         scoreText = new JLabel();
@@ -46,19 +55,22 @@ public class CrapsPanel extends JPanel implements ActionListener {
         scoreText.setFont(new Font("Noto Sans", Font.BOLD, 20));
         scoreText.setAlignmentY(Component.TOP_ALIGNMENT);
         scoreText.setAlignmentX(Component.LEFT_ALIGNMENT);
+        scoreText.setForeground(Color.white);
 
         JPanel stakePanel = new JPanel();
         stakePanel.setLayout(new BoxLayout(stakePanel, BoxLayout.X_AXIS));
-        stakePanel.setBorder(BorderFactory.createLineBorder(Color.GREEN, 5));
+        stakePanel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
         stakePanel.setAlignmentY(Component.TOP_ALIGNMENT);
         stakePanel.setAlignmentX(Component.LEFT_ALIGNMENT);
+        stakePanel.setOpaque(false);
 
         JLabel stakeLabel = new JLabel();
         stakeLabel.setText("Stawka: ");
         stakeLabel.setFont(new Font("Noto Sans", Font.BOLD, 20));
+        stakeLabel.setForeground(Color.white);
 
         stakeSpinner = new JSpinner(new SpinnerNumberModel(5, 5, Integer.MAX_VALUE, 5));
-        stakeSpinner.setMaximumSize(new Dimension(200, 30));
+        stakeSpinner.setMaximumSize(new Dimension(300, 30));
         stakeSpinner.setFont(new Font(stakeSpinner.getFont().getName(), Font.BOLD + Font.ITALIC, 16));
 
         stakePanel.add(stakeLabel);
@@ -66,13 +78,15 @@ public class CrapsPanel extends JPanel implements ActionListener {
 
         JPanel betPanel = new JPanel();
         betPanel.setLayout(new BoxLayout(betPanel, BoxLayout.Y_AXIS));
-        betPanel.setBorder(BorderFactory.createLineBorder(Color.BLUE, 5));
+        betPanel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
         betPanel.setAlignmentY(Component.TOP_ALIGNMENT);
         betPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
+        betPanel.setOpaque(false);
 
         JLabel betLabel = new JLabel();
         betLabel.setText("Zakład:");
         betLabel.setFont(new Font("Noto Sans", Font.BOLD, 20));
+        betLabel.setForeground(Color.white);
         betLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
 
         betComboBox = new JComboBox<>();
@@ -87,9 +101,11 @@ public class CrapsPanel extends JPanel implements ActionListener {
         JLabel betDescriptionLabel = new JLabel();
         betDescriptionLabel.setText("Szczegóły zakładu:");
         betDescriptionLabel.setFont(new Font("Noto Sans", Font.BOLD, 20));
+        betDescriptionLabel.setForeground(Color.white);
         betDescriptionLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
 
         betDescriptionText = new JTextArea();
+        betDescriptionText.setMaximumSize(new Dimension(500, 100));
         betDescriptionText.setText(gameLogic.getBets().get(0).getDescription());
         betDescriptionText.setLineWrap(true);
         betDescriptionText.setWrapStyleWord(true);
@@ -109,7 +125,8 @@ public class CrapsPanel extends JPanel implements ActionListener {
         JPanel dicePanel = new JPanel();
         dicePanel.setLayout(new BoxLayout(dicePanel, BoxLayout.X_AXIS));
         dicePanel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        dicePanel.setBorder(BorderFactory.createLineBorder(Color.GREEN, 5));
+        dicePanel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+        dicePanel.setOpaque(false);
 
         dice1 = new DiceImg();
         dice1.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -121,7 +138,7 @@ public class CrapsPanel extends JPanel implements ActionListener {
 
         resultText = new JLabel();
         resultText.setFont(new Font("Noto Sans", Font.BOLD + Font.ITALIC, 20));
-        resultText.setOpaque(true);
+        resultText.setForeground(Color.white);
         resultText.setVerticalAlignment(JLabel.BOTTOM);
         resultText.setHorizontalAlignment(JLabel.CENTER);
         resultText.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -139,52 +156,11 @@ public class CrapsPanel extends JPanel implements ActionListener {
         playContainer.add(rollButton);
 
         // Main Container
-        mainContainer.add(optionsContainer);
         mainContainer.add(playContainer);
+        mainContainer.add(optionsContainer);
 
         this.add(mainContainer);
         this.setVisible(true);
-        /*
-        dicePanel = new JPanel();
-        dicePanel.setLayout(new BoxLayout(dicePanel, BoxLayout.LINE_AXIS));
-        dicePanel.setBounds(225, 20, 250, 100);
-        dicePanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-
-        dice1 = new DiceImg(225, 20);
-        dice2 = new DiceImg(375, 20);
-
-        dicePanel.add(dice1);
-        dicePanel.add(dice2);
-
-        // wybranie zakladu, stawki i opis zakladu
-        selectPanel = new JPanel();
-        selectPanel.setBounds(0, 0, 200, 460);
-        selectPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-
-        stakeSpinner = new JSpinner(new SpinnerNumberModel(5,5,100,5));
-        selectPanel.add(new JLabel("Stawka:"));
-        selectPanel.add(stakeSpinner);
-
-        //score panel
-        scoreLabel = new JLabel();
-        scoreLabel.setText("Twoje fundusze: " + gameLogic.getScore() + "$");
-        scoreLabel.setFont(new Font("MV Boli", Font.BOLD,20));
-        scoreLabel.setOpaque(true);
-        scoreLabel.setVerticalAlignment(JLabel.BOTTOM);
-        scoreLabel.setHorizontalAlignment(JLabel.CENTER);
-        scoreLabel.setBounds(200, 150, 300, 150);
-
-        JPanel scorePanel = new JPanel();
-        scorePanel.setBounds(200, 150, 400, 150);
-        scorePanel.add(scoreLabel);
-
-        setLayout(null);
-        add(dicePanel);
-        add(selectPanel);
-        add(scorePanel);
-        addButton();
-        setVisible(true);
-        */
     }
 
     @Override

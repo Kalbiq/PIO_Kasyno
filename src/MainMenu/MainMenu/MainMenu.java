@@ -50,7 +50,7 @@ public class MainMenu {
 
     public static void main(String[] args)
     {
-        File file = new File(System.getProperty("user.dir")+"\\gameData\\playerFunds.txt");
+        File file = new File(System.getProperty("user.dir")+"/gameData/playerFunds.txt");
 
         Scanner scanner= null;
         try {
@@ -79,7 +79,7 @@ public class MainMenu {
 
 
             Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-            ImageIcon icon= new ImageIcon(System.getProperty("user.dir")+"\\images\\iconBlackjack.png");
+            ImageIcon icon= new ImageIcon(System.getProperty("user.dir")+"/images/iconBlackjack.png");
 
             if(!isMusicPlaying) {
                 isMusicPlaying=true;
@@ -105,12 +105,12 @@ public class MainMenu {
             frame.setIconImage(icon.getImage());
            // frame.getContentPane().setBackground( new Color(71, 56, 56) );
 
-            menuBg = new ImageIcon(new ImageIcon(System.getProperty("user.dir")+"\\images\\casino.png").
-                    getImage().getScaledInstance(1185, 700, Image.SCALE_DEFAULT));
-            slotBg = new ImageIcon(new ImageIcon(System.getProperty("user.dir")+"\\images\\slotbg.png").
-                    getImage().getScaledInstance(1185, 700, Image.SCALE_DEFAULT));
-            crapsBg = new ImageIcon(new ImageIcon(System.getProperty("user.dir")+"\\images\\slotbg.png").
-                    getImage().getScaledInstance(1185, 700, Image.SCALE_DEFAULT));
+            menuBg = new ImageIcon(new ImageIcon(System.getProperty("user.dir")+"/images/casino.png").
+                    getImage().getScaledInstance(1200, 700, Image.SCALE_DEFAULT));
+            slotBg = new ImageIcon(new ImageIcon(System.getProperty("user.dir")+"/images/slotbg.png").
+                    getImage().getScaledInstance(1200, 700, Image.SCALE_DEFAULT));
+            crapsBg = new ImageIcon(new ImageIcon(System.getProperty("user.dir")+"/images/crapstable.jpg").
+                    getImage().getScaledInstance(1200, 700, Image.SCALE_DEFAULT));
             background = new JLabel();
             background.setIcon(menuBg);
             background.setBounds(0,0,1200,700);
@@ -121,7 +121,7 @@ public class MainMenu {
             imagePanel.setBounds(395,10,410,280);
             imagePanel.setOpaque(true);
 
-            ImageIcon image=new ImageIcon(System.getProperty("user.dir")+"\\images\\iconMenu.png");
+            ImageIcon image=new ImageIcon(System.getProperty("user.dir")+"/images/iconMenu.png");
 
             imageLabel=new JLabel();
             imageLabel.setBounds(0,0,410,280);
@@ -155,7 +155,7 @@ public class MainMenu {
             fundsPanel=new JPanel();
             fundsPanel.setOpaque(false);
             fundsPanel.setBounds(5,615,300,50);
-           // fundsPanel.setBackground(new Color(71, 56, 56));
+            // fundsPanel.setBackground(new Color(71, 56, 56));
 
             labelFunds=new JLabel("Twoje fundusze: "+FUNDS+" $");
             labelFunds.setBounds(0,0,300,50);
@@ -168,92 +168,75 @@ public class MainMenu {
 
 
             blackjackButton.addActionListener(
-                    new ActionListener() {
-                        @Override
-                        public void actionPerformed(ActionEvent e) {
+                new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
 
-                            frame.getContentPane().removeAll();
+                        frame.getContentPane().removeAll();
 
-                            BJ.BlackJack.main(new String[]{""});
-                            FUNDS=BJ.BlackJack.FUNDS;
+                        BJ.BlackJack.main(new String[]{""});
+                        FUNDS=BJ.BlackJack.FUNDS;
 
-                            BJ.TestGUI bj=new BJ.TestGUI(1200,700,FUNDS);
+                        BJ.TestGUI bj=new BJ.TestGUI(1200,700,FUNDS);
 
-                            frame.add(bj);
+                        frame.add(bj);
 
+                        frame.validate();
+                        bj.validate();
 
-                            frame.validate();
-                            bj.validate();
-
-                            frame.repaint();
-                            frame.revalidate();
-
-
-
-                        }
-
+                        frame.repaint();
+                        frame.revalidate();
                     }
+                }
             );
 
             crapsButton.addActionListener(
-                    new ActionListener() {
-                        @Override
-                        public void actionPerformed(ActionEvent e) {
+                new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
 
-                            frame.getContentPane().removeAll();
+                        frame.getContentPane().removeAll();
 
-                            background.setIcon(crapsBg);
-                            BJ.BlackJack.main(new String[]{""});
-                            FUNDS=BJ.BlackJack.FUNDS;
-                            frame.add(background);
-                            frame.add(new CrapsPanel());
+                        background.setIcon(crapsBg);
 
-                            frame.revalidate();
-                            frame.repaint();
-                            frame.add(menuButton);
-
-                        }
-
+                        frame.add(new CrapsPanel());
+                        frame.revalidate();
+                        frame.repaint();
+                        frame.add(menuButton);
+                        frame.add(background);
                     }
+                }
             );
 
             slotmachineButton.addActionListener(
-                    new ActionListener() {
-                        @Override
-                        public void actionPerformed(ActionEvent e) {
-                            frame.getContentPane().removeAll();
+                new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        frame.getContentPane().removeAll();
 
 
-                            background.setIcon(slotBg);
-                            BJ.BlackJack.main(new String[]{""});
-                            FUNDS=BJ.BlackJack.FUNDS;
+                        background.setIcon(slotBg);
+                        BJ.BlackJack.main(new String[]{""});
+                        FUNDS=BJ.BlackJack.FUNDS;
 
-                            frame.add(new SlotMachine(FUNDS));
-                            frame.revalidate();
-                            frame.repaint();
-                            frame.add(menuButton);
-                            frame.add(background);
-
-
-                        }
-
+                        frame.add(new SlotMachine(FUNDS));
+                        frame.revalidate();
+                        frame.repaint();
+                        frame.add(menuButton);
+                        frame.add(background);
                     }
+                }
             );
             menuButton.addActionListener(
-                    new ActionListener() {
-                        @Override
-                        public void actionPerformed(ActionEvent e) {
-                            frame.getContentPane().removeAll();
-                            frame.revalidate();
-                            addPanels();
-                            frame.repaint();
-
-
-
-
-                        }
-
+                new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        frame.getContentPane().removeAll();
+                        frame.revalidate();
+                        addPanels();
+                        frame.repaint();
                     }
+                }
             );
 
             settingsButton.addActionListener(

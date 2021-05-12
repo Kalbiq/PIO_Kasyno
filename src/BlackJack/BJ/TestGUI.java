@@ -52,7 +52,7 @@ public class TestGUI extends JPanel {
         {
 
             Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-            ImageIcon icon= new ImageIcon(System.getProperty("user.dir")+"\\images\\iconBlackjack.png");
+            ImageIcon icon= new ImageIcon(System.getProperty("user.dir")+"/images/iconBlackjack.png");
 
             frame = new SimpleFrame(WIDTH, HEIGHT);
             frame.setLocation(dim.width/2-frame.getSize().width/2, dim.height/2-frame.getSize().height/2);
@@ -64,7 +64,7 @@ public class TestGUI extends JPanel {
             this.setLayout(null);
             this.setBounds(0,0,WIDTH,HEIGHT);
 
-            pokertable = new ImageIcon(new ImageIcon(System.getProperty("user.dir")+"\\images\\pokertable.png").
+            pokertable = new ImageIcon(new ImageIcon(System.getProperty("user.dir")+"/images/pokertable.png").
                     getImage().getScaledInstance(1185, 700, Image.SCALE_DEFAULT));
             background = new JLabel();
             background.setIcon(pokertable);
@@ -161,7 +161,7 @@ public class TestGUI extends JPanel {
             playerCardsPanel.setOpaque(false);
             playerCardsPanel.setBounds(0, 250, WIDTH, 250);
             playerCardsPanel.add(new Card(System.getProperty("user.dir") +
-                    "\\images\\cards\\" + player.player_hand.get(player.cards_amount - 1) +
+                    "/images/cards/" + player.player_hand.get(player.cards_amount - 1) +
                     ".png", playerCardsStart).imageLabel, Integer.valueOf(zPlayerOrder));
             zPlayerOrder++;
             gamePanel.add(playerCardsPanel);
@@ -205,7 +205,7 @@ public class TestGUI extends JPanel {
                                     player.addCard(deck.drawCard());
                                     playerCardsStart += 25;
                                     playerCardsPanel.add(new Card(System.getProperty("user.dir") +
-                                            "\\images\\cards\\" + player.player_hand.get(player.cards_amount - 1) +
+                                            "/images/cards/" + player.player_hand.get(player.cards_amount - 1) +
                                             ".png", playerCardsStart).imageLabel, Integer.valueOf(zPlayerOrder));
                                     zPlayerOrder++;
                                     playerCardsPanel.repaint();
@@ -260,7 +260,7 @@ public class TestGUI extends JPanel {
                                 public void run() {
                                     dealer.addCard(deck.drawCard());
                                     enemyCardsPanel.add(new Card(System.getProperty("user.dir") +
-                                            "\\images\\cards\\" + dealer.player_hand.get(dealer.cards_amount - 1) +
+                                            "/images/cards/" + dealer.player_hand.get(dealer.cards_amount - 1) +
                                             ".png", enemyCardsStart).imageLabel, Integer.valueOf(zEnemyOrder));
                                     zEnemyOrder++;
                                     enemyCardsStart -= 25;

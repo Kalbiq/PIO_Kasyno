@@ -14,7 +14,7 @@ public class BlackJack {
 
     public static void main(String[] args)
     {
-        File file = new File(System.getProperty("user.dir")+"\\gameData\\playerFunds.txt");
+        File file = new File(System.getProperty("user.dir")+"/gameData/playerFunds.txt");
 
         Scanner scanner= null;
         try {

@@ -22,7 +22,7 @@ public class FundsRebalance {
         playerFUNDS=playerFUNDS+add;
 
         try {
-            FileWriter writer=new FileWriter(System.getProperty("user.dir")+"\\gameData\\playerFunds.txt");
+            FileWriter writer=new FileWriter(System.getProperty("user.dir")+"/gameData/playerFunds.txt");
 
             if(playerFUNDS>9999)
             {
@@ -44,7 +44,7 @@ public class FundsRebalance {
         playerFUNDS=playerFUNDS-sub;
 
         try {
-            FileWriter writer=new FileWriter(System.getProperty("user.dir")+"\\gameData\\playerFunds.txt");
+            FileWriter writer=new FileWriter(System.getProperty("user.dir")+"/gameData/playerFunds.txt");
             writer.write(Integer.toString(playerFUNDS));
             writer.close();
         } catch (IOException e) {
@@ -56,7 +56,7 @@ public class FundsRebalance {
     {
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 
-        ImageIcon icon=new ImageIcon(System.getProperty("user.dir")+"\\images\\errorIcon.png");
+        ImageIcon icon=new ImageIcon(System.getProperty("user.dir")+"/images/errorIcon.png");
 
         frame = new JFrame("Uwaga!");
         frame.setSize(300,200);
@@ -133,7 +133,7 @@ public class FundsRebalance {
     {
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 
-        ImageIcon icon=new ImageIcon(System.getProperty("user.dir")+"\\images\\errorIcon.png");
+        ImageIcon icon=new ImageIcon(System.getProperty("user.dir")+"/images/errorIcon.png");
 
         frame = new JFrame("Uwaga!");
         frame.setSize(300,200);

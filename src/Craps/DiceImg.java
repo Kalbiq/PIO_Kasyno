@@ -7,8 +7,9 @@ public class DiceImg extends JLabel {
 
     public DiceImg() {
         this.imgName = "dice1";
-        setSize(100, 100);
-        setImg(imgName);
+        this.setSize(100, 100);
+        this.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+        this.setImg(imgName);
     }
 
     public void setImg(String name) {
