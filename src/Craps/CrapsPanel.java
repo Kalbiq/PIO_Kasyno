@@ -36,7 +36,7 @@ public class CrapsPanel extends JPanel implements ActionListener {
 
         JPanel optionsContainer = new JPanel();
         optionsContainer.setLayout(new BoxLayout(optionsContainer, BoxLayout.Y_AXIS));
-        optionsContainer.setMaximumSize(new Dimension(500, 400));
+        optionsContainer.setMaximumSize(new Dimension(300, 400));
         optionsContainer.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
         optionsContainer.setAlignmentX(Component.CENTER_ALIGNMENT);
         optionsContainer.setAlignmentY(Component.CENTER_ALIGNMENT);
@@ -69,8 +69,8 @@ public class CrapsPanel extends JPanel implements ActionListener {
         stakeLabel.setFont(new Font("Noto Sans", Font.BOLD, 20));
         stakeLabel.setForeground(Color.white);
 
-        stakeSpinner = new JSpinner(new SpinnerNumberModel(5, 5, Integer.MAX_VALUE, 5));
-        stakeSpinner.setMaximumSize(new Dimension(300, 30));
+        stakeSpinner = new JSpinner(new SpinnerNumberModel(5, 5, 10000, 5));
+        stakeSpinner.setMaximumSize(new Dimension(100, 30));
         stakeSpinner.setFont(new Font(stakeSpinner.getFont().getName(), Font.BOLD + Font.ITALIC, 16));
 
         stakePanel.add(stakeLabel);
@@ -137,14 +137,14 @@ public class CrapsPanel extends JPanel implements ActionListener {
         dicePanel.add(dice2);
 
         resultText = new JLabel();
-        resultText.setFont(new Font("Noto Sans", Font.BOLD + Font.ITALIC, 20));
+        resultText.setFont(new Font("Noto Sans", Font.BOLD + Font.ITALIC, 35));
         resultText.setForeground(Color.white);
         resultText.setVerticalAlignment(JLabel.BOTTOM);
         resultText.setHorizontalAlignment(JLabel.CENTER);
         resultText.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         rollButton = new JButton();
-        rollButton.setSize(150, 75);
+        rollButton.setMinimumSize(new Dimension(150, 70));
         rollButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         rollButton.setText("Rzuć!");
         rollButton.addActionListener(this);
@@ -176,10 +176,12 @@ public class CrapsPanel extends JPanel implements ActionListener {
             if (win) {
                 // tekst o wygranej
                 resultText.setText("Wygrałeś!");
+                resultText.setForeground(Color.yellow);
 
             } else {
                 //tekst o przegranej
                 resultText.setText("Przegrałeś.");
+                resultText.setForeground(Color.red);
 
             }
             scoreText.setText("Twoje fundusze: $" + gameLogic.getScore());
