@@ -36,6 +36,7 @@ public class MainMenu {
     private static ImageIcon crapsBg;
 
     public static boolean isMusicPlaying;
+    public static Settings settings;
 
     public static int FUNDS;
 
@@ -260,8 +261,10 @@ public class MainMenu {
                         @Override
                         public void actionPerformed(ActionEvent e) {
 
-                            Settings settings=new Settings();
-                            settings.displaySettings();
+                            if(settings==null) {
+                                settings = new Settings();
+                                settings.displaySettings();
+                            }
 
                         }
 
