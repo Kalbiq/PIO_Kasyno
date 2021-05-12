@@ -16,7 +16,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
 
-
 public class MainMenu {
 
     private static JFrame frame;
@@ -183,7 +182,7 @@ public class MainMenu {
 
                         frame.getContentPane().removeAll();
 
-                        BJ.BlackJack.main(new String[]{""});
+                        BJ.BlackJack.readFile();
                         FUNDS=BJ.BlackJack.FUNDS;
 
                         BJ.TestGUI bj=new BJ.TestGUI(1200,700,FUNDS);
@@ -225,7 +224,7 @@ public class MainMenu {
 
 
                         background.setIcon(slotBg);
-                        BJ.BlackJack.main(new String[]{""});
+                        BJ.BlackJack.readFile();
                         FUNDS=BJ.BlackJack.FUNDS;
 
                         frame.add(new SlotMachine(FUNDS));
@@ -298,7 +297,7 @@ public class MainMenu {
         frame.repaint();
         frame.revalidate();
 
-        BlackJack.main(new String[]{"",});
+        BlackJack.readFile();
         FUNDS=BlackJack.FUNDS;
 
         labelFunds.setText("Twoje fundusze: "+FUNDS+" $");
@@ -330,7 +329,7 @@ public class MainMenu {
         frame.getContentPane().removeAll();
 
 
-        BlackJack.main(new String[]{"",});
+        BlackJack.readFile();
         FUNDS=BlackJack.FUNDS;
 
 

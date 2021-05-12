@@ -21,7 +21,7 @@ public class SlotMachine extends JPanel implements ActionListener {
 
 
     public SlotMachine(int account) {
-        BJ.BlackJack.main(new String[] {","});
+        BJ.BlackJack.readFile();
         this.account = BlackJack.FUNDS;
 
 //visual panel
