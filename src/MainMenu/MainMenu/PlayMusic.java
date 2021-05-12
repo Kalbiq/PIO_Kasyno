@@ -9,6 +9,7 @@ import java.io.InputStream;
 public class PlayMusic {
 
     public static Clip clip;
+    public static int stateOfSlider=10;
     public static int reduceVolume;
     static{
         reduceVolume=0;
@@ -64,6 +65,7 @@ public class PlayMusic {
     public static void ChangeVolume(int value)
     {
         reduceVolume=10-value;
+        stateOfSlider=value;
 
         if(value==0) reduceVolume=200;
 

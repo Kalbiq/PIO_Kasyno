@@ -133,7 +133,7 @@ public class Settings implements ChangeListener {
         final int slider_MAX = 10;
         final int slider_INIT= 10;
 
-        musicSlider=new JSlider(JSlider.HORIZONTAL,slider_MIN,slider_MAX,slider_INIT);
+        musicSlider=new JSlider(JSlider.HORIZONTAL,slider_MIN,slider_MAX,PlayMusic.stateOfSlider);
 
         musicSlider.addChangeListener(this);
 
