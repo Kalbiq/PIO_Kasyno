@@ -25,4 +25,8 @@ public class Deck {
         return decktoshuffle.get(deck_it-1);
     }
 
+    public int getDeck_it(){
+        return deck_it;
+    }
+
 }
