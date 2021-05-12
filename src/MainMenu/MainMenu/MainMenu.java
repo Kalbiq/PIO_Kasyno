@@ -42,15 +42,14 @@ public class MainMenu {
 
     static {
         FUNDS = 0;
-        isMusicPlaying=false;
+        isMusicPlaying = false;
     }
 
 
-    public static void main(String[] args)
-    {
-        File file = new File(System.getProperty("user.dir")+"/gameData/playerFunds.txt");
+    public static void main(String[] args) {
+        File file = new File(System.getProperty("user.dir") + "/gameData/playerFunds.txt");
 
-        Scanner scanner= null;
+        Scanner scanner = null;
         try {
             scanner = new Scanner(file);
 
@@ -58,32 +57,28 @@ public class MainMenu {
             e.printStackTrace();
         }
 
-        if(scanner.hasNextInt())
-        {
-            FUNDS=scanner.nextInt();
+        if (scanner.hasNextInt()) {
+            FUNDS = scanner.nextInt();
 
-            if(FUNDS>9999)
-            {
-                FUNDS=9999;
-                FundsRebalance.subtractBalance(10000,1);
+            if (FUNDS > 9999) {
+                FUNDS = 9999;
+                FundsRebalance.subtractBalance(10000, 1);
             }
         }
-
 
 
         EventQueue.invokeLater(() ->
         {
 
 
-
             Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-            ImageIcon icon= new ImageIcon(System.getProperty("user.dir")+"/images/iconBlackjack.png");
+            ImageIcon icon = new ImageIcon(System.getProperty("user.dir") + "/images/iconBlackjack.png");
 
-            if(!isMusicPlaying) {
-                isMusicPlaying=true;
+            if (!isMusicPlaying) {
+                isMusicPlaying = true;
                 PlayMusic musicPlayer = new PlayMusic();
                 try {
-                    musicPlayer.playMusic("Nuta #1");
+                    PlayMusic.playMusic("Nuta #1");
                 } catch (IOException e) {
                     e.printStackTrace();
                 } catch (UnsupportedAudioFileException e) {
@@ -93,80 +88,77 @@ public class MainMenu {
                 }
             }
 
-            frame=new JFrame("Kasyno Lichwiarz");
-            frame.setSize(1200,700);
-            frame.setLocation(dim.width/2-frame.getSize().width/2, dim.height/2-frame.getSize().height/2);
+            frame = new JFrame("Kasyno Lichwiarz");
+            frame.setSize(1200, 700);
+            frame.setLocation(dim.width / 2 - frame.getSize().width / 2, dim.height / 2 - frame.getSize().height / 2);
             frame.setLayout(null);
             frame.setResizable(false);
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             frame.setVisible(true);
             frame.setIconImage(icon.getImage());
-           // frame.getContentPane().setBackground( new Color(71, 56, 56) );
 
-            menuBg = new ImageIcon(new ImageIcon(System.getProperty("user.dir")+"/images/casino.png").
+            menuBg = new ImageIcon(new ImageIcon(System.getProperty("user.dir") + "/images/casino.png").
                     getImage().getScaledInstance(1200, 700, Image.SCALE_DEFAULT));
-            slotBg = new ImageIcon(new ImageIcon(System.getProperty("user.dir")+"/images/slotbg.png").
+            slotBg = new ImageIcon(new ImageIcon(System.getProperty("user.dir") + "/images/slotbg.png").
                     getImage().getScaledInstance(1200, 700, Image.SCALE_DEFAULT));
-            crapsBg = new ImageIcon(new ImageIcon(System.getProperty("user.dir")+"/images/crapstable.jpg").
+            crapsBg = new ImageIcon(new ImageIcon(System.getProperty("user.dir") + "/images/crapstable.jpg").
                     getImage().getScaledInstance(1200, 700, Image.SCALE_DEFAULT));
             background = new JLabel();
             background.setIcon(menuBg);
-            background.setBounds(0,0,1200,700);
+            background.setBounds(0, 0, 1200, 700);
             background.setOpaque(true);
 
-            imagePanel=new JPanel();
+            imagePanel = new JPanel();
             imagePanel.setLayout(null);
-            imagePanel.setBounds(395,10,410,280);
+            imagePanel.setBounds(395, 10, 410, 280);
             imagePanel.setOpaque(true);
 
-            ImageIcon image=new ImageIcon(System.getProperty("user.dir")+"/images/iconMenu.png");
+            ImageIcon image = new ImageIcon(System.getProperty("user.dir") + "/images/iconMenu.png");
 
-            imageLabel=new JLabel();
-            imageLabel.setBounds(0,0,410,280);
+            imageLabel = new JLabel();
+            imageLabel.setBounds(0, 0, 410, 280);
             imageLabel.setIcon(image);
             imageLabel.setOpaque(true);
-            imageLabel.setBackground(new Color(0,0,0, 0));
+            imageLabel.setBackground(new Color(0, 0, 0, 0));
 
             imagePanel.add(imageLabel);
 
 
-            menuPanel=new JPanel();
+            menuPanel = new JPanel();
             menuPanel.setLayout(null);
-            menuPanel.setBounds(400,300,400,320);
+            menuPanel.setBounds(400, 300, 400, 320);
             menuPanel.setOpaque(false);
-           // menuPanel.setBackground(new Color(71, 56, 56));
 
-            blackjackButton=new JButton("Blackjack");
-            blackjackButton.setBounds(0,0,400,60);
+            blackjackButton = new JButton("Blackjack");
+            blackjackButton.setBounds(0, 0, 400, 60);
             blackjackButton.setBackground(new Color(45, 39, 39));
             blackjackButton.setForeground(Color.white);
-            slotmachineButton=new JButton("Jednoręki Bandyta");
-            slotmachineButton.setBounds(0,80,400,60);
+            slotmachineButton = new JButton("Jednoręki Bandyta");
+            slotmachineButton.setBounds(0, 80, 400, 60);
             slotmachineButton.setBackground(new Color(45, 39, 39));
             slotmachineButton.setForeground(Color.white);
-            crapsButton=new JButton("Kości");
-            crapsButton.setBounds(0,160,400,60);
+            crapsButton = new JButton("Kości");
+            crapsButton.setBounds(0, 160, 400, 60);
             crapsButton.setBackground(new Color(45, 39, 39));
             crapsButton.setForeground(Color.white);
-            settingsButton=new JButton("Ustawienia");
-            settingsButton.setBounds(0,240,400,60);
+            settingsButton = new JButton("Ustawienia");
+            settingsButton.setBounds(0, 240, 400, 60);
             settingsButton.setBackground(new Color(45, 39, 39));
             settingsButton.setForeground(Color.white);
-            invisibleButton=new JButton();
-            invisibleButton.setBounds(0,0,0,0);
+            invisibleButton = new JButton();
+            invisibleButton.setBounds(0, 0, 0, 0);
 
-            menuButton=new JButton("Menu");
-            menuButton.setBounds(15,585,200,60);
+            menuButton = new JButton("Menu");
+            menuButton.setBounds(15, 585, 200, 60);
 
 
-
-            fundsPanel=new JPanel();
+            fundsPanel = new JPanel();
             fundsPanel.setOpaque(false);
-            fundsPanel.setBounds(5,615,300,50);
+            fundsPanel.setBounds(5, 615, 300, 50);
             // fundsPanel.setBackground(new Color(71, 56, 56));
 
-            labelFunds=new JLabel("Twoje fundusze: "+FUNDS+" $");
-            labelFunds.setBounds(0,0,300,50);
+            labelFunds = new JLabel("Twoje fundusze: " + FUNDS + " $");
+            labelFunds.setBounds(0, 0, 300, 50);
             labelFunds.setFont(new Font("MV Boli", Font.BOLD, 20));
             labelFunds.setForeground(Color.white);
             labelFunds.setOpaque(false);
@@ -176,75 +168,75 @@ public class MainMenu {
 
 
             blackjackButton.addActionListener(
-                new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
+                    new ActionListener() {
+                        @Override
+                        public void actionPerformed(ActionEvent e) {
 
-                        frame.getContentPane().removeAll();
+                            frame.getContentPane().removeAll();
 
-                        BJ.BlackJack.readFile();
-                        FUNDS=BJ.BlackJack.FUNDS;
+                            BJ.BlackJack.readFile();
+                            FUNDS = BJ.BlackJack.FUNDS;
 
-                        BJ.TestGUI bj=new BJ.TestGUI(1200,700,FUNDS);
+                            BJ.TestGUI bj = new BJ.TestGUI(1200, 700, FUNDS);
 
-                        frame.add(bj);
+                            frame.add(bj);
 
-                        frame.validate();
-                        bj.validate();
+                            frame.validate();
+                            bj.validate();
 
-                        frame.repaint();
-                        frame.revalidate();
+                            frame.repaint();
+                            frame.revalidate();
+                        }
                     }
-                }
             );
 
             crapsButton.addActionListener(
-                new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
+                    new ActionListener() {
+                        @Override
+                        public void actionPerformed(ActionEvent e) {
 
-                        frame.getContentPane().removeAll();
+                            frame.getContentPane().removeAll();
 
-                        background.setIcon(crapsBg);
+                            background.setIcon(crapsBg);
 
-                        frame.add(new CrapsPanel());
-                        frame.revalidate();
-                        frame.repaint();
-                        frame.add(menuButton);
-                        frame.add(background);
+                            frame.add(new CrapsPanel());
+                            frame.revalidate();
+                            frame.repaint();
+                            frame.add(menuButton);
+                            frame.add(background);
+                        }
                     }
-                }
             );
 
             slotmachineButton.addActionListener(
-                new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        frame.getContentPane().removeAll();
+                    new ActionListener() {
+                        @Override
+                        public void actionPerformed(ActionEvent e) {
+                            frame.getContentPane().removeAll();
 
 
-                        background.setIcon(slotBg);
-                        BJ.BlackJack.readFile();
-                        FUNDS=BJ.BlackJack.FUNDS;
+                            background.setIcon(slotBg);
+                            BJ.BlackJack.readFile();
+                            FUNDS = BJ.BlackJack.FUNDS;
 
-                        frame.add(new SlotMachine(FUNDS));
-                        frame.revalidate();
-                        frame.repaint();
-                        frame.add(menuButton);
-                        frame.add(background);
+                            frame.add(new SlotMachine(FUNDS));
+                            frame.revalidate();
+                            frame.repaint();
+                            frame.add(menuButton);
+                            frame.add(background);
+                        }
                     }
-                }
             );
             menuButton.addActionListener(
-                new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        frame.getContentPane().removeAll();
-                        frame.revalidate();
-                        addPanels();
-                        frame.repaint();
+                    new ActionListener() {
+                        @Override
+                        public void actionPerformed(ActionEvent e) {
+                            frame.getContentPane().removeAll();
+                            frame.revalidate();
+                            addPanels();
+                            frame.repaint();
+                        }
                     }
-                }
             );
 
             settingsButton.addActionListener(
@@ -252,7 +244,7 @@ public class MainMenu {
                         @Override
                         public void actionPerformed(ActionEvent e) {
 
-                            if(settings==null) {
+                            if (settings == null) {
                                 settings = new Settings();
                                 settings.displaySettings();
                             }
@@ -263,7 +255,6 @@ public class MainMenu {
             );
 
 
-
         });
     }
 
@@ -271,9 +262,9 @@ public class MainMenu {
 
         frame.getContentPane().removeAll();
 
-        File file = new File(System.getProperty("user.dir")+"/gameData/playerFunds.txt");
+        File file = new File(System.getProperty("user.dir") + "/gameData/playerFunds.txt");
 
-        Scanner scanner= null;
+        Scanner scanner = null;
         try {
             scanner = new Scanner(file);
 
@@ -281,14 +272,12 @@ public class MainMenu {
             e.printStackTrace();
         }
 
-        if(scanner.hasNextInt())
-        {
-            FUNDS=scanner.nextInt();
+        if (scanner.hasNextInt()) {
+            FUNDS = scanner.nextInt();
 
-            if(FUNDS>9999)
-            {
-                FUNDS=9999;
-                FundsRebalance.subtractBalance(10000,1);
+            if (FUNDS > 9999) {
+                FUNDS = 9999;
+                FundsRebalance.subtractBalance(10000, 1);
             }
         }
 
@@ -298,9 +287,9 @@ public class MainMenu {
         frame.revalidate();
 
         BlackJack.readFile();
-        FUNDS=BlackJack.FUNDS;
+        FUNDS = BlackJack.FUNDS;
 
-        labelFunds.setText("Twoje fundusze: "+FUNDS+" $");
+        labelFunds.setText("Twoje fundusze: " + FUNDS + " $");
 
         frame.add(imagePanel);
         menuPanel.add(invisibleButton);
@@ -318,22 +307,20 @@ public class MainMenu {
 
     }
 
-    public static void changeFunds(int value)
-    {
-        labelFunds.setText("Twoje fundusze: "+value+" $");
+    public static void changeFunds(int value) {
+        labelFunds.setText("Twoje fundusze: " + value + " $");
         labelFunds.repaint();
     }
 
-    public static void refreshBlackjack()
-    {
+    public static void refreshBlackjack() {
         frame.getContentPane().removeAll();
 
 
         BlackJack.readFile();
-        FUNDS=BlackJack.FUNDS;
+        FUNDS = BlackJack.FUNDS;
 
 
-        BJ.TestGUI bj=new BJ.TestGUI(1200,700,FUNDS);
+        BJ.TestGUI bj = new BJ.TestGUI(1200, 700, FUNDS);
 
         frame.add(bj);
 
@@ -345,13 +332,11 @@ public class MainMenu {
         frame.revalidate();
 
 
-
     }
 
-    public static void refreshFunds(int value)
-    {
+    public static void refreshFunds(int value) {
         System.out.println("refreshFunds");
-        FUNDS-=value;
+        FUNDS -= value;
         refreshBlackjack();
     }
 

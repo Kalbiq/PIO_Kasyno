@@ -5,9 +5,10 @@ import java.util.*;
 public class Deck {
 
     private int deck_it;
-    private ArrayList<String> decktoshuffle;
+    private final ArrayList<String> decktoshuffle;
+
     public Deck() {
-        deck_it=0;
+        deck_it = 0;
         decktoshuffle = new ArrayList<>();
         decktoshuffle.addAll(Arrays.asList("C2", "C3", "C4", "C5", "C6", "C7", "C8", "C9",
                 "CA", "CJ", "CK", "CQ", "CT", "D2", "D3", "D4", "D5", "D6", "D7", "D8", "D9", "DA", "DJ", "DK", "DQ", "DT", "H2", "H3",
@@ -15,17 +16,16 @@ public class Deck {
                 "SJ", "SK", "SQ", "ST"));
     }
 
-    public void shuffleDeck(){
+    public void shuffleDeck() {
         Collections.shuffle(decktoshuffle);
     }
 
-    public String drawCard()
-    {
+    public String drawCard() {
         deck_it++;
-        return decktoshuffle.get(deck_it-1);
+        return decktoshuffle.get(deck_it - 1);
     }
 
-    public int getDeck_it(){
+    public int getDeck_it() {
         return deck_it;
     }
 

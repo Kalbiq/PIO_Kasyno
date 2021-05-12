@@ -17,8 +17,8 @@ import java.util.Objects;
 
 public class Settings implements ChangeListener {
 
-    private static final int WIDTH=1000;
-    private static final int HEIGHT=600;
+    private static final int WIDTH = 1000;
+    private static final int HEIGHT = 600;
     private static JFrame frame;
     private static JPanel mainPanel;
     private static JPanel settingsPanel;
@@ -35,166 +35,156 @@ public class Settings implements ChangeListener {
     private static JButton fundsButton;
     private static JComboBox musicList;
     private static JSlider musicSlider;
-    private static String[] music;
+    private static final String[] music;
 
     private static JScrollPane sp;
 
 
-    static{
-        music=new String[]{"Nuta #1","Nuta #2","Nuta #3","Nuta #4"};
+    static {
+        music = new String[]{"Nuta #1", "Nuta #2", "Nuta #3", "Nuta #4"};
     }
 
 
-    public void displaySettings()
-    {
+    public void displaySettings() {
 
 
         EventQueue.invokeLater(() ->
         {
 
-        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-        ImageIcon icon= new ImageIcon(System.getProperty("user.dir")+"\\images\\iconBlackjack.png");
+            Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+            ImageIcon icon = new ImageIcon(System.getProperty("user.dir") + "\\images\\iconBlackjack.png");
 
 
+            frame = new JFrame("Kasyno Lichwiarz - Ustawienia");
+            frame.setSize(WIDTH, HEIGHT);
+            frame.setLocation(dim.width / 2 - frame.getSize().width / 2, dim.height / 2 - frame.getSize().height / 2);
+            frame.setLayout(null);
+            frame.setResizable(false);
+            frame.setVisible(true);
+            frame.setIconImage(icon.getImage());
+            frame.getContentPane().setBackground(new Color(31, 30, 30));
+            frame.addWindowListener(new WindowAdapter() {
 
-        frame=new JFrame("Kasyno Lichwiarz - Ustawienia");
-        frame.setSize(WIDTH,HEIGHT);
-        frame.setLocation(dim.width/2-frame.getSize().width/2, dim.height/2-frame.getSize().height/2);
-        frame.setLayout(null);
-        frame.setResizable(false);
-        frame.setVisible(true);
-        frame.setIconImage(icon.getImage());
-        frame.getContentPane().setBackground( new Color(31, 30, 30) );
-        frame.addWindowListener(new WindowAdapter() {
+                @Override
 
-            @Override
+                public void windowClosing(WindowEvent e) {
 
-            public void windowClosing(WindowEvent e) {
+                    changeBooleanMainMenu();
 
-                changeBooleanMainMenu();
+                }
 
-            }
+            });
 
-        });
-
-        mainPanel=new JPanel();
-        mainPanel.setLayout(null);
-        mainPanel.setBounds(0,0,WIDTH,HEIGHT);
-        mainPanel.setOpaque(false);
-
-
-        mainText=new JLabel("USTAWIENIA");
-        mainText.setBounds(325,5,350,100);
-        mainText.setForeground(Color.white);
-        mainText.setBackground(Color.black);
-        mainText.setFont(new Font("MV Boli", Font.BOLD, 50));
-        mainPanel.add(mainText);
-
-        settingsPanel=new JPanel();
-        settingsPanel.setBounds(250,100,500,400);
-        settingsPanel.setBackground(Color.black);
-        settingsPanel.setLayout(null);
-        settingsPanel.setOpaque(false);
-
-        musicChoicePanel=new JPanel();
-        musicChoicePanel.setLayout(null);
-        musicChoicePanel.setBounds(0,0,500,100);
-        musicChoicePanel.setOpaque(false);
-       // musicChoicePanel.setBackground(Color.green);
-
-        musicTextLabel=new JLabel("Muzyka:");
-        musicTextLabel.setBounds(0,0,100,100);
-        musicTextLabel.setForeground(Color.white);
-        musicTextLabel.setFont(new Font("MV Boli", Font.BOLD, 20));
-
-        musicList=new JComboBox(music);
-        musicList.setSelectedIndex(0);
-        musicList.setBounds(110,25,175,50);
-
-        musicListButton=new JButton("Wybierz");
-        musicListButton.setBounds(310,25,175,50);
-
-        musicChoicePanel.add(musicTextLabel);
-        musicChoicePanel.add(musicList);
-        musicChoicePanel.add(musicListButton);
-
-        musicVolumePanel=new JPanel();
-        musicVolumePanel.setLayout(null);
-        musicVolumePanel.setBounds(0,100,500,100);
-        musicVolumePanel.setOpaque(false);
-       // musicVolumePanel.setBackground(Color.red);
-
-        musicVolumeLabel=new JLabel("Glosnosc:");
-        musicVolumeLabel.setBounds(0,0,200,100);
-        musicVolumeLabel.setForeground(Color.white);
-        musicVolumeLabel.setFont(new Font("MV Boli", Font.BOLD, 20));
-
-        final int slider_MIN = 0;
-        final int slider_MAX = 10;
-        final int slider_INIT= 10;
-
-        musicSlider=new JSlider(JSlider.HORIZONTAL,slider_MIN,slider_MAX,PlayMusic.stateOfSlider);
-
-        musicSlider.addChangeListener(this);
-
-        musicSlider.setMajorTickSpacing(10);
-        musicSlider.setMinorTickSpacing(1);
-        musicSlider.setBounds(105,40,200,50);
-        musicSlider.setBackground(new Color(31, 30, 30));
-        musicSlider.setForeground(Color.white);
-        musicSlider.setPaintTicks(true);
-        musicSlider.setPaintLabels(true);
-
-        musicVolumePanel.add(musicVolumeLabel);
-        musicVolumePanel.add(musicSlider);
+            mainPanel = new JPanel();
+            mainPanel.setLayout(null);
+            mainPanel.setBounds(0, 0, WIDTH, HEIGHT);
+            mainPanel.setOpaque(false);
 
 
+            mainText = new JLabel("USTAWIENIA");
+            mainText.setBounds(325, 5, 350, 100);
+            mainText.setForeground(Color.white);
+            mainText.setBackground(Color.black);
+            mainText.setFont(new Font("MV Boli", Font.BOLD, 50));
+            mainPanel.add(mainText);
 
-        setDefaultFundsPanel=new JPanel();
-        setDefaultFundsPanel.setLayout(null);
-        setDefaultFundsPanel.setBounds(0,200,500,100);
-        setDefaultFundsPanel.setOpaque(false);
-        //setDefaultFundsPanel.setBackground(Color.blue);
+            settingsPanel = new JPanel();
+            settingsPanel.setBounds(250, 100, 500, 400);
+            settingsPanel.setBackground(Color.black);
+            settingsPanel.setLayout(null);
+            settingsPanel.setOpaque(false);
 
-        fundsLabel=new JLabel("Fundusze: ");
-        fundsLabel.setBounds(0,0,200,100);
-        fundsLabel.setForeground(Color.white);
-        fundsLabel.setFont(new Font("MV Boli", Font.BOLD, 20));
+            musicChoicePanel = new JPanel();
+            musicChoicePanel.setLayout(null);
+            musicChoicePanel.setBounds(0, 0, 500, 100);
+            musicChoicePanel.setOpaque(false);
 
-        fundsButton=new JButton("Reset: 500$");
-        fundsButton.setBounds(110,25,175,50);
+            musicTextLabel = new JLabel("Muzyka:");
+            musicTextLabel.setBounds(0, 0, 100, 100);
+            musicTextLabel.setForeground(Color.white);
+            musicTextLabel.setFont(new Font("MV Boli", Font.BOLD, 20));
+
+            musicList = new JComboBox(music);
+            musicList.setSelectedIndex(0);
+            musicList.setBounds(110, 25, 175, 50);
+
+            musicListButton = new JButton("Wybierz");
+            musicListButton.setBounds(310, 25, 175, 50);
+
+            musicChoicePanel.add(musicTextLabel);
+            musicChoicePanel.add(musicList);
+            musicChoicePanel.add(musicListButton);
+
+            musicVolumePanel = new JPanel();
+            musicVolumePanel.setLayout(null);
+            musicVolumePanel.setBounds(0, 100, 500, 100);
+            musicVolumePanel.setOpaque(false);
+
+            musicVolumeLabel = new JLabel("Glosnosc:");
+            musicVolumeLabel.setBounds(0, 0, 200, 100);
+            musicVolumeLabel.setForeground(Color.white);
+            musicVolumeLabel.setFont(new Font("MV Boli", Font.BOLD, 20));
+
+            final int slider_MIN = 0;
+            final int slider_MAX = 10;
+
+            musicSlider = new JSlider(JSlider.HORIZONTAL, slider_MIN, slider_MAX, PlayMusic.stateOfSlider);
+
+            musicSlider.addChangeListener(this);
+
+            musicSlider.setMajorTickSpacing(10);
+            musicSlider.setMinorTickSpacing(1);
+            musicSlider.setBounds(105, 40, 200, 50);
+            musicSlider.setBackground(new Color(31, 30, 30));
+            musicSlider.setForeground(Color.white);
+            musicSlider.setPaintTicks(true);
+            musicSlider.setPaintLabels(true);
+
+            musicVolumePanel.add(musicVolumeLabel);
+            musicVolumePanel.add(musicSlider);
 
 
-        setDefaultFundsPanel.add(fundsLabel);
-        setDefaultFundsPanel.add(fundsButton);
+            setDefaultFundsPanel = new JPanel();
+            setDefaultFundsPanel.setLayout(null);
+            setDefaultFundsPanel.setBounds(0, 200, 500, 100);
+            setDefaultFundsPanel.setOpaque(false);
+            //setDefaultFundsPanel.setBackground(Color.blue);
+
+            fundsLabel = new JLabel("Fundusze: ");
+            fundsLabel.setBounds(0, 0, 200, 100);
+            fundsLabel.setForeground(Color.white);
+            fundsLabel.setFont(new Font("MV Boli", Font.BOLD, 20));
+
+            fundsButton = new JButton("Reset: 500$");
+            fundsButton.setBounds(110, 25, 175, 50);
 
 
-        infoPanel=new JPanel();
-        infoPanel.setLayout(null);
-        infoPanel.setBounds(0,300,500,100);
-        infoPanel.setOpaque(false);
-
-        infoLabel=new JLabel("Maksymalna kwota do zdobycia: 9999$");
-        infoLabel.setBounds(0,0,500,100);
-        infoLabel.setForeground(Color.white);
-        infoLabel.setFont(new Font("MV Boli", Font.BOLD, 20));
-
-        infoPanel.add(infoLabel);
-
-        settingsPanel.add(musicChoicePanel);
-        settingsPanel.add(musicVolumePanel);
-        settingsPanel.add(setDefaultFundsPanel);
-        settingsPanel.add(infoPanel);
+            setDefaultFundsPanel.add(fundsLabel);
+            setDefaultFundsPanel.add(fundsButton);
 
 
-        mainPanel.add(settingsPanel);
+            infoPanel = new JPanel();
+            infoPanel.setLayout(null);
+            infoPanel.setBounds(0, 300, 500, 100);
+            infoPanel.setOpaque(false);
+
+            infoLabel = new JLabel("Maksymalna kwota do zdobycia: 9999$");
+            infoLabel.setBounds(0, 0, 500, 100);
+            infoLabel.setForeground(Color.white);
+            infoLabel.setFont(new Font("MV Boli", Font.BOLD, 20));
+
+            infoPanel.add(infoLabel);
+
+            settingsPanel.add(musicChoicePanel);
+            settingsPanel.add(musicVolumePanel);
+            settingsPanel.add(setDefaultFundsPanel);
+            settingsPanel.add(infoPanel);
 
 
+            mainPanel.add(settingsPanel);
 
 
-
-        frame.add(mainPanel);
-
+            frame.add(mainPanel);
 
 
             musicListButton.addActionListener(
@@ -202,7 +192,7 @@ public class Settings implements ChangeListener {
                         @Override
                         public void actionPerformed(ActionEvent e) {
 
-                            String music= Objects.requireNonNull(musicList.getSelectedItem()).toString();
+                            String music = Objects.requireNonNull(musicList.getSelectedItem()).toString();
                             PlayMusic.clip.stop();
                             try {
                                 PlayMusic.playMusic(music);
@@ -226,7 +216,7 @@ public class Settings implements ChangeListener {
                         @Override
                         public void actionPerformed(ActionEvent e) {
 
-                            FundsRebalance.addBalance(495,5);
+                            FundsRebalance.addBalance(495, 5);
                             MainMenu.changeFunds(500);
 
                         }
@@ -241,14 +231,13 @@ public class Settings implements ChangeListener {
     @Override
     public void stateChanged(ChangeEvent e) {
 
-            PlayMusic.ChangeVolume(musicSlider.getValue());
+        PlayMusic.ChangeVolume(musicSlider.getValue());
 
 
     }
 
-    private void changeBooleanMainMenu()
-    {
-        MainMenu.settings=null;
+    private void changeBooleanMainMenu() {
+        MainMenu.settings = null;
     }
 
 }

@@ -40,14 +40,14 @@ public class betTests {
         betsRead = gameLogic.getBets();
 
         int i = 0;
-        for (Bet bet: betsRead) {
+        for (Bet bet : betsRead) {
             Bet betGiven = betsGiven.get(i);
 
-            if(bet.getMultiplier() != betGiven.getMultiplier())
+            if (bet.getMultiplier() != betGiven.getMultiplier())
                 fault = true;
-            if(!bet.getDescription().equals(betGiven.getDescription()))
+            if (!bet.getDescription().equals(betGiven.getDescription()))
                 fault = true;
-            if(bet.getName().equals(betGiven.getDescription()))
+            if (bet.getName().equals(betGiven.getDescription()))
                 fault = true;
 
             i += 1;
@@ -57,7 +57,7 @@ public class betTests {
     }
 
     @Test
-    public void betCheckSeven_true(){
+    public void betCheckSeven_true() {
         Bet betSeven = new Bet("Seven", new int[]{7}, 5);
         int[] dice = {3, 4};
         boolean result;
@@ -68,7 +68,7 @@ public class betTests {
     }
 
     @Test
-    public void betCheckSeven_false(){
+    public void betCheckSeven_false() {
         Bet betSeven = new Bet("Seven", new int[]{7}, 5);
         int[] dice = {1, 1};
         boolean result;
@@ -79,7 +79,7 @@ public class betTests {
     }
 
     @Test
-    public void betCheckHardways_true(){
+    public void betCheckHardways_true() {
         BetHardways betHardways = new BetHardways("Hardways", 8);
         int[] dice = {4, 4};
         boolean result;
@@ -90,7 +90,7 @@ public class betTests {
     }
 
     @Test
-    public void betCheckHardways_false(){
+    public void betCheckHardways_false() {
         BetHardways betHardways = new BetHardways("Hardways", 8);
         int[] dice = {4, 2};
         boolean result;
@@ -101,7 +101,7 @@ public class betTests {
     }
 
     @Test
-    public void toStringHorn(){
+    public void toStringHorn() {
         Bet betHorn = new Bet("Horn", new int[]{2, 3, 11, 12}, 5);
         String correctName = "Horn";
 

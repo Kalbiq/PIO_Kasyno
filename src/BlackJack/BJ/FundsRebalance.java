@@ -16,17 +16,15 @@ public class FundsRebalance {
     private static JButton okButton;
     private static JButton cancelButton;
 
-    public static void addBalance(int playerFUNDS, int add)
-    {
+    public static void addBalance(int playerFUNDS, int add) {
 
-        playerFUNDS=playerFUNDS+add;
+        playerFUNDS = playerFUNDS + add;
 
         try {
-            FileWriter writer=new FileWriter(System.getProperty("user.dir")+"/gameData/playerFunds.txt");
+            FileWriter writer = new FileWriter(System.getProperty("user.dir") + "/gameData/playerFunds.txt");
 
-            if(playerFUNDS>9999)
-            {
-                playerFUNDS=9999;
+            if (playerFUNDS > 9999) {
+                playerFUNDS = 9999;
             }
 
             writer.write(Integer.toString(playerFUNDS));
@@ -36,15 +34,13 @@ public class FundsRebalance {
         }
 
 
-
     }
 
-    public static void subtractBalance(int playerFUNDS, int sub)
-    {
-        playerFUNDS=playerFUNDS-sub;
+    public static void subtractBalance(int playerFUNDS, int sub) {
+        playerFUNDS = playerFUNDS - sub;
 
         try {
-            FileWriter writer=new FileWriter(System.getProperty("user.dir")+"/gameData/playerFunds.txt");
+            FileWriter writer = new FileWriter(System.getProperty("user.dir") + "/gameData/playerFunds.txt");
             writer.write(Integer.toString(playerFUNDS));
             writer.close();
         } catch (IOException e) {
@@ -52,39 +48,37 @@ public class FundsRebalance {
         }
     }
 
-    public static void displayWarning(int value, int playerFUNDS)
-    {
+    public static void displayWarning(int value, int playerFUNDS) {
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 
-        ImageIcon icon=new ImageIcon(System.getProperty("user.dir")+"/images/errorIcon.png");
+        ImageIcon icon = new ImageIcon(System.getProperty("user.dir") + "/images/errorIcon.png");
 
         frame = new JFrame("Uwaga!");
-        frame.setSize(300,200);
+        frame.setSize(300, 200);
         frame.setIconImage(icon.getImage());
-        frame.setLocation(dim.width/2-frame.getSize().width/2, dim.height/2-frame.getSize().height/2);
+        frame.setLocation(dim.width / 2 - frame.getSize().width / 2, dim.height / 2 - frame.getSize().height / 2);
         frame.setResizable(false);
         frame.setLayout(null);
         frame.setVisible(true);
 
 
-
-        label=new JLabel("Porzucając tę rozgrywkę stracisz "+value+" $ !");
-        label.setBounds(0,0,300,75);
+        label = new JLabel("Porzucając tę rozgrywkę stracisz " + value + " $ !");
+        label.setBounds(0, 0, 300, 75);
         label.setForeground(Color.RED);
         label.setFont(new Font("Arial", Font.BOLD, 13));
         label.setVerticalTextPosition(JLabel.CENTER);
 
-        warningPanel=new JPanel();
-        warningPanel.setBounds(0,25,300,75);
+        warningPanel = new JPanel();
+        warningPanel.setBounds(0, 25, 300, 75);
         warningPanel.add(label);
         warningPanel.setOpaque(true);
 
-        okButton=new JButton("OK");
-        cancelButton=new JButton("Anuluj");
+        okButton = new JButton("OK");
+        cancelButton = new JButton("Anuluj");
 
-        buttonPanel=new JPanel();
-        buttonPanel.setBounds(75,100,150,50);
-        buttonPanel.setLayout(new GridLayout(1,1));
+        buttonPanel = new JPanel();
+        buttonPanel.setBounds(75, 100, 150, 50);
+        buttonPanel.setLayout(new GridLayout(1, 1));
         buttonPanel.add(okButton);
         buttonPanel.add(cancelButton);
         buttonPanel.setOpaque(true);
@@ -99,7 +93,7 @@ public class FundsRebalance {
 
                         frame.setVisible(false);
                         frame.dispose();
-                        FundsRebalance.subtractBalance(playerFUNDS,value);
+                        FundsRebalance.subtractBalance(playerFUNDS, value);
                         MainMenu.MainMenu.refreshFunds(value);
 
                     }
@@ -123,45 +117,40 @@ public class FundsRebalance {
         );
 
 
-
     }
 
 
-
-
-    public static void displayWarningToMenu(int value, int playerFUNDS)
-    {
+    public static void displayWarningToMenu(int value, int playerFUNDS) {
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 
-        ImageIcon icon=new ImageIcon(System.getProperty("user.dir")+"/images/errorIcon.png");
+        ImageIcon icon = new ImageIcon(System.getProperty("user.dir") + "/images/errorIcon.png");
 
         frame = new JFrame("Uwaga!");
-        frame.setSize(300,200);
+        frame.setSize(300, 200);
         frame.setIconImage(icon.getImage());
-        frame.setLocation(dim.width/2-frame.getSize().width/2, dim.height/2-frame.getSize().height/2);
+        frame.setLocation(dim.width / 2 - frame.getSize().width / 2, dim.height / 2 - frame.getSize().height / 2);
         frame.setResizable(false);
         frame.setLayout(null);
         frame.setVisible(true);
 
 
-
-        label=new JLabel("Porzucając tę rozgrywkę stracisz "+value+" $ !");
-        label.setBounds(0,0,300,75);
+        label = new JLabel("Porzucając tę rozgrywkę stracisz " + value + " $ !");
+        label.setBounds(0, 0, 300, 75);
         label.setForeground(Color.RED);
         label.setFont(new Font("Arial", Font.BOLD, 13));
         label.setVerticalTextPosition(JLabel.CENTER);
 
-        warningPanel=new JPanel();
-        warningPanel.setBounds(0,25,300,75);
+        warningPanel = new JPanel();
+        warningPanel.setBounds(0, 25, 300, 75);
         warningPanel.add(label);
         warningPanel.setOpaque(true);
 
-        okButton=new JButton("OK");
-        cancelButton=new JButton("Anuluj");
+        okButton = new JButton("OK");
+        cancelButton = new JButton("Anuluj");
 
-        buttonPanel=new JPanel();
-        buttonPanel.setBounds(75,100,150,50);
-        buttonPanel.setLayout(new GridLayout(1,1));
+        buttonPanel = new JPanel();
+        buttonPanel.setBounds(75, 100, 150, 50);
+        buttonPanel.setLayout(new GridLayout(1, 1));
         buttonPanel.add(okButton);
         buttonPanel.add(cancelButton);
         buttonPanel.setOpaque(true);
@@ -176,7 +165,7 @@ public class FundsRebalance {
 
                         frame.setVisible(false);
                         frame.dispose();
-                        FundsRebalance.subtractBalance(playerFUNDS,value);
+                        FundsRebalance.subtractBalance(playerFUNDS, value);
                         MainMenu.MainMenu.addPanels();
                     }
 

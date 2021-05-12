@@ -13,25 +13,25 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class readFundsFromFileTests {
 
     @Test
-    public void checkStatusOfFunds(){
+    public void checkStatusOfFunds() {
 
         //given
-        File file = new File(System.getProperty("user.dir")+"/gameData/playerFunds.txt");
+        File file = new File(System.getProperty("user.dir") + "/gameData/playerFunds.txt");
 
-        Scanner scanner= null;
+        Scanner scanner = null;
         try {
             scanner = new Scanner(file);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
 
-        int expectedValue= Objects.requireNonNull(scanner).nextInt();
+        int expectedValue = Objects.requireNonNull(scanner).nextInt();
 
         //when
-        int result= BlackJack.readFile();
+        int result = BlackJack.readFile();
 
         //then
-        assertEquals(expectedValue,result);
+        assertEquals(expectedValue, result);
     }
 
 }

@@ -13,22 +13,22 @@ public class slotImageTests {
     public Slot slot;
 
     @BeforeEach
-    public void SetUp(){
-        slot=new Slot(0,0);
+    public void SetUp() {
+        slot = new Slot(0, 0);
     }
 
     @Test
-    public void check_setSlotImage(){
+    public void check_setSlotImage() {
 
         //given
-        String iconName="banana";
+        String iconName = "banana";
 
         //when
         slot.setSlotImage(iconName);
-        String result=slot.getSlotName();
+        String result = slot.getSlotName();
 
         //then
-        assertEquals(iconName,result);
+        assertEquals(iconName, result);
 
     }
 

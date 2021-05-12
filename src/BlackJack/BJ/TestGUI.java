@@ -30,8 +30,8 @@ public class TestGUI extends JPanel {
     private ImageIcon pokertable;
     private int playerCardsStart = 500;
     private int enemyCardsStart = 600;
-    private int zPlayerOrder=0;
-    private int zEnemyOrder=0;
+    private int zPlayerOrder = 0;
+    private int zEnemyOrder = 0;
     public int playerFUNDS;
     public int playerStake;
     private boolean pass;
@@ -43,80 +43,78 @@ public class TestGUI extends JPanel {
         Deck deck = new Deck();
         deck.shuffleDeck();
         pass = false;
-        reset= true;
-        playerFUNDS=FUNDS;
-        playerStake=0;
+        reset = true;
+        playerFUNDS = FUNDS;
+        playerStake = 0;
 
 
         EventQueue.invokeLater(() ->
         {
 
             Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-            ImageIcon icon= new ImageIcon(System.getProperty("user.dir")+"/images/iconBlackjack.png");
+            ImageIcon icon = new ImageIcon(System.getProperty("user.dir") + "/images/iconBlackjack.png");
 
             frame = new SimpleFrame(WIDTH, HEIGHT);
-            frame.setLocation(dim.width/2-frame.getSize().width/2, dim.height/2-frame.getSize().height/2);
+            frame.setLocation(dim.width / 2 - frame.getSize().width / 2, dim.height / 2 - frame.getSize().height / 2);
             frame.setResizable(false);
             frame.setLayout(null);
             frame.setIconImage(icon.getImage());
 
 
             this.setLayout(null);
-            this.setBounds(0,0,WIDTH,HEIGHT);
+            this.setBounds(0, 0, WIDTH, HEIGHT);
 
-            pokertable = new ImageIcon(new ImageIcon(System.getProperty("user.dir")+"/images/pokertable.png").
+            pokertable = new ImageIcon(new ImageIcon(System.getProperty("user.dir") + "/images/pokertable.png").
                     getImage().getScaledInstance(1185, 700, Image.SCALE_DEFAULT));
             background = new JLabel();
             background.setIcon(pokertable);
-            background.setBounds(0,0,1200,700);
+            background.setBounds(0, 0, 1200, 700);
 
 
             labelResult = new JLabel("");
             labelResult.setHorizontalAlignment(JLabel.CENTER);
             labelResult.setVerticalAlignment(JLabel.CENTER);
             labelResult.setFont(new Font("Serif", Font.ITALIC, 80));
-            labelResult.setBounds(400,228,400,100);
-
-
+            labelResult.setBounds(400, 228, 400, 100);
 
 
             buttonPlay = new SimpleButton("Dobierz");
-            buttonPlay.setBounds(0,0,100,50);
+            buttonPlay.setBounds(0, 0, 100, 50);
             buttonPass = new SimpleButton("Pass");
-            buttonPass.setBounds(100,0,100,50);
+            buttonPass.setBounds(100, 0, 100, 50);
             buttonMenu = new SimpleButton("Menu");
-            buttonMenu.setBounds(35,21,100,40);
+            buttonMenu.setBounds(35, 21, 100, 40);
             buttonReset = new SimpleButton("Reset");
-            buttonReset.setBounds(1050,21,100,40);
+            buttonReset.setBounds(1050, 21, 100, 40);
 
             player.addCard(deck.drawCard());
 
 
             labelPlayer = new JLabel("Suma Twojej reki: " + player.sum);
-            labelPlayer.setSize(300,50);
-            labelPlayer.setBounds(450,13,300,50);
+            labelPlayer.setSize(300, 50);
+            labelPlayer.setBounds(450, 13, 300, 50);
             labelPlayer.setHorizontalAlignment(JLabel.CENTER);
             labelPlayer.setFont(new Font("MV Boli", Font.BOLD, 18));
             labelPlayer.setForeground(Color.white);
 
             labelDealer = new JLabel("Suma reki krupiera: 0");
-            labelDealer.setSize(300,50);
-            labelDealer.setBounds(450,30,300,50);
+            labelDealer.setSize(300, 50);
+            labelDealer.setBounds(450, 30, 300, 50);
             labelDealer.setHorizontalAlignment(JLabel.CENTER);
             labelDealer.setForeground(Color.white);
             labelDealer.setFont(new Font("MV Boli", Font.BOLD, 15));
 
             labelSpinner = new JLabel("Stawka:");
-            labelSpinner.setBounds(30,15,200,50);
+            labelSpinner.setBounds(30, 15, 200, 50);
             labelSpinner.setForeground(Color.white);
             labelSpinner.setFont(new Font("MV Boli", Font.BOLD, 20));
-            stakeSpinner = new JSpinner(new SpinnerNumberModel(0,0,FUNDS,5));
-            stakeSpinner.setBounds(125,25,50,30);
+            stakeSpinner = new JSpinner(new SpinnerNumberModel(0, 0, FUNDS, 5));
+            stakeSpinner.setBounds(125, 25, 50, 30);
             ((JSpinner.DefaultEditor) stakeSpinner.getEditor()).getTextField().setEditable(false);
 
 
-            labelFunds= new JLabel("Fundusze: "+FUNDS+"$");
-            labelFunds.setBounds(1010,15,200,50);
+            labelFunds = new JLabel("Fundusze: " + FUNDS + "$");
+            labelFunds.setBounds(1010, 15, 200, 50);
             labelFunds.setForeground(Color.white);
             labelFunds.setFont(new Font("MV Boli", Font.BOLD, 20));
 
@@ -156,7 +154,7 @@ public class TestGUI extends JPanel {
             controlPanel.add(buttonMenu);
 
             playerCardsPanel = new JLayeredPane();
-            playerCardsPanel.setLayout(new FlowLayout(FlowLayout.CENTER,-80,80));
+            playerCardsPanel.setLayout(new FlowLayout(FlowLayout.CENTER, -80, 80));
             playerCardsPanel.setBackground(new Color(44, 173, 212));
             playerCardsPanel.setOpaque(false);
             playerCardsPanel.setBounds(0, 250, WIDTH, 250);
@@ -169,7 +167,7 @@ public class TestGUI extends JPanel {
             enemyCardsPanel = new JLayeredPane();
             enemyCardsPanel.setBackground(new Color(0x2CADD4));
             enemyCardsPanel.setOpaque(false);
-            enemyCardsPanel.setLayout(new FlowLayout(FlowLayout.CENTER,-80,100));
+            enemyCardsPanel.setLayout(new FlowLayout(FlowLayout.CENTER, -80, 100));
             enemyCardsPanel.setBounds(0, 0, WIDTH, 250);
 
 
@@ -186,9 +184,9 @@ public class TestGUI extends JPanel {
             this.add(sumPanel);
             this.add(controlPanel);
             this.add(background);
-           // frame.add(this);
+            // frame.add(this);
 
-           // this.validate();
+            // this.validate();
             this.revalidate();
             this.repaint();
 
@@ -215,24 +213,24 @@ public class TestGUI extends JPanel {
                                 if (player.sum > 21) {
                                     labelResult.setForeground(Color.RED);
                                     labelResult.setText("Przegrales");
-                                    FundsRebalance.subtractBalance(playerFUNDS, (Integer)stakeSpinner.getValue());
-                                    playerFUNDS=playerFUNDS-(Integer)stakeSpinner.getValue();
+                                    FundsRebalance.subtractBalance(playerFUNDS, (Integer) stakeSpinner.getValue());
+                                    playerFUNDS = playerFUNDS - (Integer) stakeSpinner.getValue();
                                     buttonPass.setEnabled(false);
                                     buttonPlay.setEnabled(false);
-                                    labelFunds.setText("Fundusze: "+playerFUNDS+"$");
+                                    labelFunds.setText("Fundusze: " + playerFUNDS + "$");
                                     gamePanel.repaint();
-                                    reset=false;
+                                    reset = false;
                                 } else if (player.sum == 21) {
                                     labelResult.setForeground(Color.GREEN);
                                     labelResult.setText("Wygrales");
-                                    FundsRebalance.addBalance(playerFUNDS, (Integer)stakeSpinner.getValue());
-                                    playerFUNDS=playerFUNDS+(Integer)stakeSpinner.getValue();
-                                    if(playerFUNDS>9999) playerFUNDS=9999;
+                                    FundsRebalance.addBalance(playerFUNDS, (Integer) stakeSpinner.getValue());
+                                    playerFUNDS = playerFUNDS + (Integer) stakeSpinner.getValue();
+                                    if (playerFUNDS > 9999) playerFUNDS = 9999;
                                     buttonPass.setEnabled(false);
                                     buttonPlay.setEnabled(false);
-                                    labelFunds.setText("Fundusze: "+playerFUNDS+"$");
+                                    labelFunds.setText("Fundusze: " + playerFUNDS + "$");
                                     gamePanel.repaint();
-                                    reset=false;
+                                    reset = false;
                                 }
                             }
 
@@ -268,34 +266,34 @@ public class TestGUI extends JPanel {
 
                                     labelDealer.setText("Suma reki krupiera: " + dealer.sum);
 
-                                    if (dealer.sum >= player.sum && dealer.sum<=21) {
+                                    if (dealer.sum >= player.sum && dealer.sum <= 21) {
                                         buttonReset.setEnabled(true);
                                         buttonMenu.setEnabled(true);
                                         labelResult.setForeground(Color.RED);
                                         labelResult.setText("Przegrales");
-                                        FundsRebalance.subtractBalance(playerFUNDS, (Integer)stakeSpinner.getValue());
-                                        playerFUNDS=playerFUNDS-(Integer)stakeSpinner.getValue();
-                                        labelFunds.setText("Fundusze: "+playerFUNDS+"$");
+                                        FundsRebalance.subtractBalance(playerFUNDS, (Integer) stakeSpinner.getValue());
+                                        playerFUNDS = playerFUNDS - (Integer) stakeSpinner.getValue();
+                                        labelFunds.setText("Fundusze: " + playerFUNDS + "$");
                                         gamePanel.repaint();
-                                        reset=false;
+                                        reset = false;
                                         myTimer.cancel();
 
-                                        } else if (dealer.sum>21){
+                                    } else if (dealer.sum > 21) {
                                         buttonReset.setEnabled(true);
                                         buttonMenu.setEnabled(true);
                                         labelResult.setForeground(Color.GREEN);
                                         labelResult.setText("Wygrales");
-                                        FundsRebalance.addBalance(playerFUNDS, (Integer)stakeSpinner.getValue());
-                                        playerFUNDS=playerFUNDS+(Integer)stakeSpinner.getValue();
-                                        if(playerFUNDS>9999) playerFUNDS=9999;
-                                        labelFunds.setText("Fundusze: "+playerFUNDS+"$");
+                                        FundsRebalance.addBalance(playerFUNDS, (Integer) stakeSpinner.getValue());
+                                        playerFUNDS = playerFUNDS + (Integer) stakeSpinner.getValue();
+                                        if (playerFUNDS > 9999) playerFUNDS = 9999;
+                                        labelFunds.setText("Fundusze: " + playerFUNDS + "$");
                                         gamePanel.repaint();
-                                        reset=false;
+                                        reset = false;
                                         myTimer.cancel();
-                                        }
-
-
                                     }
+
+
+                                }
 
 
                             };
@@ -313,20 +311,17 @@ public class TestGUI extends JPanel {
                         @Override
                         public void actionPerformed(ActionEvent e) {
 
-                            final int stake=(Integer)stakeSpinner.getValue();
-                            playerStake=(Integer)stakeSpinner.getValue();
+                            final int stake = (Integer) stakeSpinner.getValue();
+                            playerStake = (Integer) stakeSpinner.getValue();
 
-                            if(reset && stake>0){
+                            if (reset && stake > 0) {
                                 FundsRebalance.displayWarning(stake, playerFUNDS);
-                            }
-                            else
-                            {
+                            } else {
                                 MainMenu.MainMenu.refreshBlackjack();
                             }
 
 
-
-                            }
+                        }
 
 
                     }
@@ -338,13 +333,11 @@ public class TestGUI extends JPanel {
                         @Override
                         public void actionPerformed(ActionEvent e) {
 
-                            final int stake=(Integer)stakeSpinner.getValue();
+                            final int stake = (Integer) stakeSpinner.getValue();
 
-                            if(reset && stake>0){
+                            if (reset && stake > 0) {
                                 FundsRebalance.displayWarningToMenu(stake, playerFUNDS);
-                            }
-                            else
-                            {
+                            } else {
                                 MainMenu.MainMenu.addPanels();
                             }
 
@@ -355,13 +348,10 @@ public class TestGUI extends JPanel {
             );
 
 
-
-
         });
 
 
     }
-
 
 
     class SimpleFrame extends JFrame {
