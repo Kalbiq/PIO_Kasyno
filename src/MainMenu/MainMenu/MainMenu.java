@@ -2,8 +2,8 @@ package MainMenu;
 
 import BJ.BlackJack;
 import BJ.FundsRebalance;
+import Craps.CrapsPanel;
 import SlotMachine.SlotMachine;
-
 
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
@@ -33,6 +33,8 @@ public class MainMenu {
     private static JLabel background;
     private static ImageIcon menuBg;
     private static ImageIcon slotBg;
+    private static ImageIcon crapsBg;
+
     public static boolean isMusicPlaying;
 
     public static int FUNDS;
@@ -105,6 +107,8 @@ public class MainMenu {
             menuBg = new ImageIcon(new ImageIcon(System.getProperty("user.dir")+"\\images\\casino.png").
                     getImage().getScaledInstance(1185, 700, Image.SCALE_DEFAULT));
             slotBg = new ImageIcon(new ImageIcon(System.getProperty("user.dir")+"\\images\\slotbg.png").
+                    getImage().getScaledInstance(1185, 700, Image.SCALE_DEFAULT));
+            crapsBg = new ImageIcon(new ImageIcon(System.getProperty("user.dir")+"\\images\\slotbg.png").
                     getImage().getScaledInstance(1185, 700, Image.SCALE_DEFAULT));
             background = new JLabel();
             background.setIcon(menuBg);
@@ -189,6 +193,29 @@ public class MainMenu {
 
                     }
             );
+
+            crapsButton.addActionListener(
+                    new ActionListener() {
+                        @Override
+                        public void actionPerformed(ActionEvent e) {
+
+                            frame.getContentPane().removeAll();
+
+                            background.setIcon(crapsBg);
+                            BJ.BlackJack.main(new String[]{""});
+                            FUNDS=BJ.BlackJack.FUNDS;
+                            frame.add(background);
+                            frame.add(new CrapsPanel());
+
+                            frame.revalidate();
+                            frame.repaint();
+                            frame.add(menuButton);
+
+                        }
+
+                    }
+            );
+
             slotmachineButton.addActionListener(
                     new ActionListener() {
                         @Override

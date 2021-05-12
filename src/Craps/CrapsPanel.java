@@ -5,7 +5,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class CrapsPanel extends JFrame implements ActionListener {
+public class CrapsPanel extends JPanel implements ActionListener {
     private final JButton rollButton;
     private final GameLogic gameLogic;
     private final DiceImg dice1;
@@ -18,10 +18,9 @@ public class CrapsPanel extends JFrame implements ActionListener {
 
 
     public CrapsPanel() {
-        super("Gra w kości");
+        //super("Gra w kości");
         gameLogic = new GameLogic();
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setSize(700, 500);
+        this.setSize(1185, 700);
         this.setMinimumSize(new Dimension(600, 400));
 
         JPanel mainContainer = new JPanel();
