@@ -24,4 +24,9 @@ public class Slot extends JLabel {
         this.setIcon(slotImage);
         this.setVerticalAlignment(JLabel.CENTER);
     }
+
+    public String getSlotName()
+    {
+        return slotName;
+    }
 }
