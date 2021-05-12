@@ -18,7 +18,7 @@ public class betTests {
         List<Bet> betsRead;
         List<Bet> betsGiven = new ArrayList<>();
 
-        Bet betBoxcars = new Bet("Boxcars", new int[]{2, 12}, 7);
+        Bet betBoxcars = new Bet("Boxcars", new int[]{2, 12}, 12);
         betsGiven.add(betBoxcars);
         Bet betAceyDeucey = new Bet("Acey Deucey", new int[]{3}, 9);
         betsGiven.add(betAceyDeucey);
@@ -47,7 +47,7 @@ public class betTests {
                 fault = true;
             if (!bet.getDescription().equals(betGiven.getDescription()))
                 fault = true;
-            if (bet.getName().equals(betGiven.getDescription()))
+            if (!bet.getName().equals(betGiven.getName()))
                 fault = true;
 
             i += 1;
